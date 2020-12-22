@@ -1,20 +1,36 @@
 package org.epubmaker.Request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.json.JSONObject;
 
-public class Format {
+import java.io.IOException;
 
-    @JsonProperty("key")
+public class Format extends BaseObject {
+
+    @JsonProperty("name")
     private String key;
 
     @JsonProperty("value")
-    private String value;
+    private ScrapeSpecifics value;
 
-    public Format(String findBy, String value){
+    public Format(String findBy, ScrapeSpecifics value) {
         this.key = findBy;
         this.value = value;
     }
 
+    public Format fromJson(JSONObject object) throws IOException {
+        return objectMapper.readValue(object.toString(), Format.class);
+    }
+
+    public Format setValue(ScrapeSpecifics value) {
+        this.value = value;
+        return this;
+    }
+
+    public Format setKey(String key) {
+        this.key = key;
+        return this;
+    }
 
 
 }
