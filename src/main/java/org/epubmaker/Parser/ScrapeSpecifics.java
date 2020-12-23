@@ -6,7 +6,7 @@ import org.epubmaker.Request.BaseObject;
 import java.io.IOException;
 import java.util.List;
 
-public class ScrapeSpecifics extends BaseObject {
+public class ScrapeSpecifics implements BaseObject {
 
     @JsonProperty("nextTag")
     private Tag nextTag = null;
@@ -41,5 +41,10 @@ public class ScrapeSpecifics extends BaseObject {
 
     public List<String> getTextTags() {
         return this.textTags;
+    }
+
+    @Override
+    public BaseObject fromString(String json) {
+        return null;
     }
 }
