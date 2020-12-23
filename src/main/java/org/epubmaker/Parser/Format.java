@@ -1,11 +1,12 @@
-package org.epubmaker.Request;
+package org.epubmaker.Parser;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.epubmaker.Request.BaseObject;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class Format extends BaseObject {
+public class Format implements BaseObject {
 
     @JsonProperty("name")
     private String key;
@@ -32,5 +33,13 @@ public class Format extends BaseObject {
         return this;
     }
 
+    @Override
+    public BaseObject fromString(String json) {
+        return null;
+    }
 
+    @Override
+    public String toString() {
+        return null;
+    }
 }

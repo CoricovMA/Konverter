@@ -1,6 +1,7 @@
-package org.epubmaker.Request;
+package org.epubmaker.Parser;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.epubmaker.Request.BaseObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,13 +9,13 @@ import java.util.List;
 public class ScrapeSpecifics extends BaseObject {
 
     @JsonProperty("nextTag")
-    private String nextTag = "";
+    private Tag nextTag = null;
 
     @JsonProperty("titleTag")
-    private String titleTag = "";
+    private Tag titleTag = null;
 
     @JsonProperty("mainTextTag")
-    private String mainTextTag = "";
+    private Tag mainTextTag = null;
 
     @JsonProperty("multipleTextTags")
     private boolean multipleTextTags = false;
@@ -22,27 +23,23 @@ public class ScrapeSpecifics extends BaseObject {
     @JsonProperty("textTags")
     private List<String> textTags = null;
 
-    public ScrapeSpecifics fromJson(String json) throws IOException {
-        return objectMapper.readValue(json, ScrapeSpecifics.class);
-    }
-
-    public String getNextTag(){
+    public Tag getNextTag(){
         return this.nextTag;
     }
 
-    public String getTitleTag() {
-        return titleTag;
+    public Tag getTitleTag() {
+        return this.titleTag;
     }
 
-    public String getMainTextTag() {
-        return mainTextTag;
+    public Tag getMainTextTag() {
+        return this.mainTextTag;
     }
 
     public boolean isMultipleTextTags() {
-        return multipleTextTags;
+        return this.multipleTextTags;
     }
 
     public List<String> getTextTags() {
-        return textTags;
+        return this.textTags;
     }
 }
