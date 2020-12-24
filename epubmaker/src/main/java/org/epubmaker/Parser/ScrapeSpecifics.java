@@ -45,6 +45,12 @@ public class ScrapeSpecifics implements BaseObject {
 
     @Override
     public BaseObject fromString(String json) {
+        try {
+            return objectMapper.readValue(json, this.getClass());
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
         return null;
     }
 }
