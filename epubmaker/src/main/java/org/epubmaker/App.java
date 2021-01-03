@@ -1,6 +1,7 @@
 package org.epubmaker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.epubmaker.JPMTL.JPUtil.JPSearch;
 import org.epubmaker.JPMTL.JPUtil.NovelResponse;
 import org.epubmaker.JPMTL.JPUtil.SearchResponse;
 import org.epubmaker.Request.RequestMaker;
@@ -55,10 +56,11 @@ public class App
                 "        \"review_count\": null\n" +
                 "    }".trim().strip());
 
-        System.out.println(json);
+//        System.out.println(json);
         try {
             long start = System.currentTimeMillis();
-            NovelResponse res = mapper.readValue(json.toString(), NovelResponse.class);
+//            NovelResponse res = mapper.readValue(json.toString(), NovelResponse.class);
+            System.out.println(JPSearch.doSearch("years").string());
             System.out.println(System.currentTimeMillis() - start);
         } catch (IOException ioException) {
             ioException.printStackTrace();
