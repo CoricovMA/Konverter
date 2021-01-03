@@ -1,8 +1,11 @@
 package org.epubmaker.JPMTL;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.epubmaker.Request.BaseObject;
 
-public class Chapter {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Chapter implements BaseObject {
 
     @JsonProperty("id")
     private long id;
@@ -10,18 +13,12 @@ public class Chapter {
     @JsonProperty("title")
     private String title;
 
-    @JsonProperty("created_at")
-    private String createdAd;
-
-    @JsonProperty("volume_id")
-    private long volumeID;
-
-    @JsonProperty("volume_title")
-    private String volumeTitle;
-
-    @JsonProperty("volume_index")
-    private int volumeIndex;
-
     @JsonProperty("index")
     private int chapterIndex;
+
+
+    @Override
+    public BaseObject fromString(String json) {
+        return null;
+    }
 }

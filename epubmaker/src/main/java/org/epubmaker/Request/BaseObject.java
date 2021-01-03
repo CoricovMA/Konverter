@@ -12,7 +12,7 @@ public interface BaseObject {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    BaseObject fromString(String json);
+    BaseObject fromString(String json) throws IOException;
 
     String toString();
 }

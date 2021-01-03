@@ -6,7 +6,7 @@ import org.epubmaker.Response.ResponseFactory;
 public class RequestHandler {
 
     public static Response doRequest(Request request){
-        ResponseFactory.getResponse(request);
+        return ResponseFactory.getResponse(request);
     }
 
 }
