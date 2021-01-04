@@ -4,17 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.json.JSONArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.PropertyResourceBundle;
 
 public class JPSearch {
 
     private static ObjectMapper mapper;
     private static OkHttpClient client;
+
+    private static final Logger logger = LogManager.getLogger(JPSearch.class);
 
     public static void init(){
         mapper = new ObjectMapper();
@@ -35,6 +36,25 @@ public class JPSearch {
         JSONObject jsonObject = new JSONObject("{\"novels\":" + s + "}");
 
         return mapper.readValue(jsonObject.toString(), SearchResponse.class);
+    }
+
+    public static NovelResponse findBook(String bookId){
+        Request request = new Request.Builder()
+                .url(String.format("https://jpmtl.com/v2/book/%s", bookId))
+                .method("GET", null)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+
+            String s = response.body().string();
+
+            return mapper.readValue(s, NovelResponse.class);
+        } catch (IOException e) {
+            logger.warn("There was an error finding a book. Book id: {}", bookId);
+        }
+
+        return null;
     }
 
 }

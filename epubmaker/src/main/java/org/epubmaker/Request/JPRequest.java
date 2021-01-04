@@ -50,14 +50,16 @@ public class JPRequest extends Request implements BaseObject {
     }
 
     private Response getList(){
-
+        return null;
     }
 
     private Response getChapter(){
+        return null;
 
     }
 
     private Response getBook(){
+        return null;
 
     }
 

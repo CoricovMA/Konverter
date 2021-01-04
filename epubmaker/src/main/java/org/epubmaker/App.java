@@ -53,17 +53,8 @@ public class App
                 "    }".trim().strip());
 
 //        System.out.println(json);
-        try {
-            long start = System.currentTimeMillis();
 //            NovelResponse res = mapper.readValue(json.toString(), NovelResponse.class);
-            System.out.println(JPSearch.doSearch("years").string());
-            System.out.println(System.currentTimeMillis() - start);
+            System.out.println(JPSearch.findBook("2417"));
 
-            start =  System.currentTimeMillis();
-            System.out.println(JPSearch.doSearch("years").string());
-            System.out.println(System.currentTimeMillis() - start);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
     }
 }

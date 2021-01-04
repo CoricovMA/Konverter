@@ -12,5 +12,12 @@ public class ChapterContent implements EMObject {
     @JsonProperty("content")
     private List<Paragraph> content;
 
+    public String getContent(){
+        StringBuilder sb = new StringBuilder();
+
+        content.forEach(paragraph -> sb.append(paragraph.getContent().trim().strip()));
+
+        return sb.toString();
+    }
 
 }

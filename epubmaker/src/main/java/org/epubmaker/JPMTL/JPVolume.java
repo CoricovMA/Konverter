@@ -19,4 +19,8 @@ public class JPVolume {
 
     @JsonProperty("chapters")
     private List<Chapter> chapters;
+
+    public List<Chapter> getChapters(){
+        return this.chapters;
+    }
 }

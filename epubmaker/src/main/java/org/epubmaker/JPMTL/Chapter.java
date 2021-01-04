@@ -16,6 +16,8 @@ public class Chapter implements BaseObject {
     @JsonProperty("index")
     private int chapterIndex;
 
+    @JsonProperty("content")
+    private ChapterContent content;
 
     @Override
     public BaseObject fromString(String json) {

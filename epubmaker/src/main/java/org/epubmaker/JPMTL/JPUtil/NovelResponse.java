@@ -33,6 +33,11 @@ public class NovelResponse{
         this.title = title;
     }
 
+    public String getTitle(){
+        return this.title;
+    }
+
+
     public String toString(){
         try {
             return mapper.writeValueAsString(this);

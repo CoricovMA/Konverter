@@ -7,9 +7,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Paragraph {
 
     @JsonProperty("type")
-    public String type;
+    private String type;
 
     @JsonProperty("content")
-    public String content;
+    private String content;
 
+    public String getContent(){
+        return this.content;
+    }
 }
