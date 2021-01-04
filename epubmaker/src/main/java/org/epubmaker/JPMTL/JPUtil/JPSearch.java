@@ -13,8 +13,13 @@ import java.util.PropertyResourceBundle;
 
 public class JPSearch {
 
-    private static final ObjectMapper mapper = new ObjectMapper();
-    private static final OkHttpClient client = new OkHttpClient().newBuilder().build();
+    private static ObjectMapper mapper;
+    private static OkHttpClient client;
+
+    public static void init(){
+        mapper = new ObjectMapper();
+        client = new OkHttpClient().newBuilder().build();
+    }
 
     public static SearchResponse doSearch(String query) throws IOException {
         
@@ -26,7 +31,6 @@ public class JPSearch {
         Response response = client.newCall(request).execute();
 
         String s = response.body().string();
-        JSONArray r = new JSONArray(s);
 
         JSONObject jsonObject = new JSONObject("{\"novels\":" + s + "}");
 

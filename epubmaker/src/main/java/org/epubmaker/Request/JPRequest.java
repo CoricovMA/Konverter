@@ -1,10 +1,11 @@
 package org.epubmaker.Request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.epubmaker.Response.Response;
 
 import java.io.IOException;
 
-public class JPMRequest extends Request implements BaseObject {
+public class JPRequest extends Request implements BaseObject {
 
     /*
     list req example: https://jpmtl.com/v2/chapter/295/list?state=published&structured=true
@@ -29,20 +30,35 @@ public class JPMRequest extends Request implements BaseObject {
     private long bookID;
 
     public enum JPMTL_REQUEST_TYPE{
-        LIST,
-        CHAPTER
+        list,
+        chapter,
+        book
     }
 
-    public JPMRequest(String url, REQUEST_TYPE type) {
+    public JPRequest(String url, REQUEST_TYPE type) {
         super(url, type);
     }
 
-    public void getAllChapters(){
-
+    @Override
+    public Response execute() {
+        return null;
     }
 
     @Override
     public BaseObject fromString(String json) throws IOException {
-        return objectMapper.readValue(json, JPMRequest.class);
+        return objectMapper.readValue(json, JPRequest.class);
     }
+
+    private Response getList(){
+
+    }
+
+    private Response getChapter(){
+
+    }
+
+    private Response getBook(){
+
+    }
+
 }

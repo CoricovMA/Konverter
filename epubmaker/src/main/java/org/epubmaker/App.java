@@ -13,11 +13,7 @@ public class App
 {
     public static void main( String[] args )
     {
-//        try {
-//            System.out.println(RequestMaker.doRequest("https://jpmtl.com/v2/chapter/89796"));
-//        } catch (IOException ioException) {
-//            ioException.printStackTrace();
-//        }
+        JPSearch.init();
 
         ObjectMapper mapper = new ObjectMapper();
         JSONObject json = new JSONObject("{\n" +
@@ -60,6 +56,10 @@ public class App
         try {
             long start = System.currentTimeMillis();
 //            NovelResponse res = mapper.readValue(json.toString(), NovelResponse.class);
+            System.out.println(JPSearch.doSearch("years").string());
+            System.out.println(System.currentTimeMillis() - start);
+
+            start =  System.currentTimeMillis();
             System.out.println(JPSearch.doSearch("years").string());
             System.out.println(System.currentTimeMillis() - start);
         } catch (IOException ioException) {

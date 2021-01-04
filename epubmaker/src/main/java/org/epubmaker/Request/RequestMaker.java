@@ -9,9 +9,9 @@ import java.io.IOException;
 
 public class RequestMaker {
 
+    private static final OkHttpClient client = new OkHttpClient().newBuilder().build();
+
     public static String doRequest(String url) throws IOException {
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
         Request request = new Request.Builder()
                 .url(url)
                 .method("GET", null)

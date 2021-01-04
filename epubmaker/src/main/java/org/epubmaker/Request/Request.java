@@ -17,5 +17,5 @@ public abstract class Request {
         this.type = type;
     }
 
-
+    public abstract Response execute();
 }

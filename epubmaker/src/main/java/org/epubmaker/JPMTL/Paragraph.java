@@ -12,6 +12,4 @@ public class Paragraph {
     @JsonProperty("content")
     public String content;
 
-
-
 }
