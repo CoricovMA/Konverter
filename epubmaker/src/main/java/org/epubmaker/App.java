@@ -1,60 +1,59 @@
 package org.epubmaker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import nl.siegmann.epublib.domain.Book;
+import nl.siegmann.epublib.domain.Metadata;
+import nl.siegmann.epublib.domain.Resource;
+import nl.siegmann.epublib.epub.EpubWriter;
+import nl.siegmann.epublib.service.MediatypeService;
+import org.epubmaker.JPMTL.Chapter;
 import org.epubmaker.JPMTL.JPUtil.JPSearch;
 import org.epubmaker.JPMTL.JPUtil.NovelResponse;
 import org.epubmaker.JPMTL.JPUtil.SearchResponse;
 import org.epubmaker.Request.RequestMaker;
 import org.json.JSONObject;
 
+import java.awt.*;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 public class App
 {
     public static void main( String[] args )
     {
-        JPSearch.init();
+        try {
+            String s = RequestMaker.getJPChapter("1191926");
+            Chapter chp = new ObjectMapper().readValue(s, Chapter.class);
+            ByteBuffer bb = ByteBuffer.wrap(chp.getFullChapter().getBytes());
+            bb.put(chp.getFullChapter().getBytes());
+            while(bb.position() > 0 && bb.position() < bb.limit()){
+                bb.clear();
+                byte [] arr = new byte[500];
+                bb.get(arr, 0, arr.length);
+                System.out.println(new String(arr));
 
-        ObjectMapper mapper = new ObjectMapper();
-        JSONObject json = new JSONObject("{\n" +
-                "        \"id\": 219,\n" +
-                "        \"content_type\": \"novel\",\n" +
-                "        \"created_at\": \"2020-04-15T16:26:59.804Z\",\n" +
-                "        \"author\": \"Enomoto Kaisei\",\n" +
-                "        \"language\": \"ja\",\n" +
-                "        \"cover\": \"https://img.jpmtl.com/1/7869a950-7f3b-11ea-a3ae-39b762c3f9a9\",\n" +
-                "        \"user_id\": 1,\n" +
-                "        \"title\": \"The 5000-year-old Herbivorous Dragon\",\n" +
-                "        \"synopsis\": \"Saying 5000 year-old-dragon has an impressive ring to it, yet that dragon was an extremely harmless, herbivorous being. However, because of his uselessly giant figure and scary appearance, he was mistaken for the Demon King’s executive and provided by the nearby village with a sacrificial maiden.\\nFundamentally cowardly and timid dragon tried to send her away, but the extremely enthusiastic sacrifice didn’t want to give up. Inevitably, he lied: “Okay, I just ate a small portion of your soul, so you can go back already”, but the maiden with outrageous assumptions has misunderstood that she became the dragon’s kin.\\nThen, out of all things, she began to manifest strange power on the basis of her wrong assumptions – in turn, the helpless dragon, by some mistake started a rebellion against the Demon King.\\nRebellion or whatnot, he wasn’t even his subordinate in the first place.\\n\",\n" +
-                "        \"main_genre_id\": 1,\n" +
-                "        \"status\": \"ongoing\",\n" +
-                "        \"rating\": null,\n" +
-                "        \"bookmark_count\": 6,\n" +
-                "        \"genres\": [\n" +
-                "            {\n" +
-                "                \"id\": 30,\n" +
-                "                \"name\": \"Action\"\n" +
-                "            },\n" +
-                "            {\n" +
-                "                \"id\": 13,\n" +
-                "                \"name\": \"Adventure\"\n" +
-                "            },\n" +
-                "            {\n" +
-                "                \"id\": 23,\n" +
-                "                \"name\": \"Comedy\"\n" +
-                "            }\n" +
-                "        ],\n" +
-                "        \"pen_name\": \"MTL Translator\",\n" +
-                "        \"word_count\": 264113,\n" +
-                "        \"chapter_count\": 203,\n" +
-                "        \"views\": 5463,\n" +
-                "        \"name\": \"Fantasy\",\n" +
-                "        \"review_count\": null\n" +
-                "    }".trim().strip());
+            }
 
-//        System.out.println(json);
-//            NovelResponse res = mapper.readValue(json.toString(), NovelResponse.class);
-            System.out.println(JPSearch.findBook("2417"));
+
+//            Book book = new Book();
+//            Metadata metadata = new Metadata();
+//            metadata.addTitle("Test");
+//
+//            book.addSection("test", new Resource(chp.getHtml().getBytes(), MediatypeService.XHTML));
+//
+//            EpubWriter writer = new EpubWriter();
+//            try {
+//                writer.write(book, new FileOutputStream("test1.epub"));
+//
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+
 
     }
 }

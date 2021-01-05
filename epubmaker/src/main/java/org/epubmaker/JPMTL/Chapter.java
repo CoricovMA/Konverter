@@ -2,6 +2,7 @@ package org.epubmaker.JPMTL;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import nl.siegmann.epublib.domain.*;
 import nl.siegmann.epublib.service.MediatypeService;
 import org.epubmaker.Request.BaseObject;
@@ -9,16 +10,7 @@ import org.epubmaker.Request.BaseObject;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Chapter implements BaseObject {
 
-    @JsonProperty("id")
-    private long id;
-
-    @JsonProperty("title")
-    private String title;
-
-    @JsonProperty("index")
-    private int chapterIndex;
-
-    @JsonProperty("content")
+    @JsonProperty("chapter")
     private ChapterContent content;
 
     @Override
@@ -28,12 +20,20 @@ public class Chapter implements BaseObject {
 
     public TOCReference getChapter(){
         TOCReference tocReference = new TOCReference();
-        tocReference.setTitle(this.title);
+        tocReference.setTitle(this.content.getTitle());
         tocReference.setResource(content.getAsResource());
         return tocReference;
     }
 
-    public String getTitle(){
-        return this.title;
+    public String string() throws JsonProcessingException {
+        return objectMapper.writeValueAsString(this);
+    }
+
+    public String getFullChapter(){
+        return content.getAllContent();
+    }
+
+    public String getHtml(){
+        return content.getContentAsHtml();
     }
 }

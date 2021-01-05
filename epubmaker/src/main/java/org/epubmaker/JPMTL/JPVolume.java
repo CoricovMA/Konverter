@@ -2,6 +2,7 @@ package org.epubmaker.JPMTL;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import nl.siegmann.epublib.domain.TOCReference;
 
 import java.util.List;
 
@@ -20,7 +21,15 @@ public class JPVolume {
     @JsonProperty("chapters")
     private List<Chapter> chapters;
 
-    public List<Chapter> getChapters(){
-        return this.chapters;
+    public TOCReference getChaptersAsResource(){
+        TOCReference volume = new TOCReference();
+
+        chapters.forEach(chapter -> volume.addChildSection(chapter.getChapter()));
+
+        return volume;
+    }
+
+    public long getVolumeIndex() {
+        return this.volume;
     }
 }

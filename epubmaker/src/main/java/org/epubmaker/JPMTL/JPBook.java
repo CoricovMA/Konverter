@@ -1,43 +1,55 @@
 package org.epubmaker.JPMTL;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.Metadata;
-import nl.siegmann.epublib.domain.Resource;
-import org.epubmaker.JPMTL.JPUtil.NovelResponse;
+import org.epubmaker.Response.EMBook;
 
-import java.util.ArrayList;
+import java.sql.Time;
 import java.util.List;
-import java.util.Map;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class JPBook {
+public class JPBook extends EMBook{
 
-    private final List<JPVolume> volumes;
-    private final NovelResponse novelInfo;
-    private Book book;
+    @JsonProperty("volumes")
+    private List<JPVolume> volumes;
 
-    public JPBook(List<JPVolume> volumes, NovelResponse novelInfo){
-        this.volumes = volumes;
-        this.novelInfo = novelInfo;
+    private String title;
+
+    public JPBook(){};
+
+    public JPBook(String title){
+        this.title = title;
     }
 
-    public void generateBook(){
+    @Override
+    public Book getBook() {
+        return this.book;
+    }
+
+    @Override
+    public void generateBook() {
         book = new Book();
-        Metadata metadata = book.getMetadata();
-        metadata.addTitle(novelInfo.getTitle());
-        volumes.stream().forEach(
-                volume -> {
-                    volume.getChapters();
+        Metadata metadata = new Metadata();
+        metadata.addTitle(this.title);
+        volumes.forEach(
+                jpVolume -> {
                 }
         );
+
     }
 
-    private List<Resource> getAllChapters(){
-        List<Resource> allRes = new ArrayList<>();
-        
+    @Override
+    protected void generateBook(int upTo) {
 
+    }
+
+    @Override
+    protected void generateBook(int from, int to) {
+
+    }
+
+    public void setTitle(String title){
+        this.title = title;
     }
 
 }
