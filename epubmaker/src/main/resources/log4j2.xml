@@ -14,7 +14,7 @@
 
     <Loggers>
 
-        <Logger name="org.epubmaker" level="warn" additivity="false" >
+        <Logger name="org.epubmaker.*" level="warn" additivity="false" >
             <AppenderRef ref="Console" />
         </Logger>
 

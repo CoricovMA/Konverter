@@ -34,6 +34,6 @@ public class Chapter implements BaseObject {
     }
 
     public String getHtml(){
-        return content.getContentAsHtml();
+        return content.prettyParagraphs();
     }
 }

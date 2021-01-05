@@ -13,6 +13,6 @@ public class Paragraph {
     private String content;
 
     public String getContent(){
-        return this.content;
+        return String.format("%s ", this.content);
     }
 }
