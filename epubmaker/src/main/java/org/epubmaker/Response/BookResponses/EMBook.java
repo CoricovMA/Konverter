@@ -1,4 +1,4 @@
-package org.epubmaker.Response;
+package org.epubmaker.Response.BookResponses;
 
 import nl.siegmann.epublib.domain.Book;
 

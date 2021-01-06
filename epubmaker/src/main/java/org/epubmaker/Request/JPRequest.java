@@ -20,23 +20,12 @@ public class JPRequest extends Request implements BaseObject {
            }
      */
 
-    @JsonProperty("url")
-    private String url;
+    public JPRequest(){
 
-    @JsonProperty("type")
-    private JPMTL_REQUEST_TYPE type;
+    };
 
-    @JsonProperty("book_id")
-    private long bookID;
-
-    public enum JPMTL_REQUEST_TYPE{
-        list,
-        chapter,
-        book
-    }
-
-    public JPRequest(String url, REQUEST_TYPE type) {
-        super(url, type);
+    public JPRequest(String url) {
+        super(url);
     }
 
     @Override

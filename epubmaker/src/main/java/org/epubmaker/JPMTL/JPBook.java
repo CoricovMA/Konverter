@@ -1,16 +1,13 @@
 package org.epubmaker.JPMTL;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.Metadata;
-import org.epubmaker.Response.EMBook;
+import org.epubmaker.Response.BookResponses.EMBook;
 
-import java.sql.Time;
 import java.util.List;
 
 public class JPBook extends EMBook{
 
-    @JsonProperty("volumes")
     private List<JPVolume> volumes;
 
     private String title;
@@ -32,8 +29,8 @@ public class JPBook extends EMBook{
         Metadata metadata = new Metadata();
         metadata.addTitle(this.title);
         volumes.forEach(
-                jpVolume -> {
-                }
+                jpVolume -> book.addSection(String.format("Volume %s", jpVolume.getVolumeIndex()),
+                        jpVolume.getChaptersAsResource().getResource())
         );
 
     }
