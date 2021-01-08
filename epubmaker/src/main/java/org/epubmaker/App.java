@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
+import java.util.LinkedList;
 
 public class App {
     public static void main(String[] args) {
@@ -34,7 +35,6 @@ public class App {
         json.put("url", "something");
         json.put("request_option", jsonObject);
         json.put("type", "jp_req");
-
         try {
             Request test = new ObjectMapper().readValue(json.toString(), Request.class);
             System.out.println(test);
@@ -63,4 +63,5 @@ public class App {
 
 
     }
+
 }
