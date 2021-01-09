@@ -42,9 +42,12 @@ function App() {
   const [a, setA] = useState([]);
 
   if(a.length === 0){
-    getListOfChaptersFrom(295, 20).then(r => setA(r))
+    getListOfChaptersFrom(295, 20).then((r) => {
+      setA(r)
+      console.log(r)
+    })
+
   }
-  console.log(a)
 
   return (
     <div>
