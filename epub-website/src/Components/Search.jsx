@@ -2,7 +2,7 @@ import {React, useState} from 'react'
 import '../Style/Search.css'
 import {FormLabel, Button, Row, Col, FormControl, Form, Card} from "react-bootstrap";
 import {searchTitle} from "../Functionality/util";
-
+import SearchCard from "./SearchCard";
 
 
 function Search(props) {
@@ -13,8 +13,7 @@ function Search(props) {
         if(!input.includes("https") && isNaN(input)){
             searchTitle(input).then((res) =>{
                 res.forEach(e => {
-                    console.log(e.title)
-                    console.log(e.cover)
+                    setCards(<SearchCard card={e} />)
                 })
             })
         }
