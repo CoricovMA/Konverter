@@ -5,7 +5,9 @@ import Search from "./Components/Search";
 
 function App() {
   return (
-        <Search className={"searchCard"}/>
+      <div>
+        <Search className={"search-card"}/>
+      </div>
   );
 }
 

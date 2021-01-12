@@ -1,12 +1,20 @@
-import {apiGetList} from "../Config/Env";
+import {apiGetList, apiSearch} from "../Config/Env";
+
+function searchTitle(toSearch) {
+    return apiSearch(toSearch).then((res) =>{
+        return res.data
+    }).catch((err) =>{
+        console.log(`There was an error: ${err}`)
+    })
+}
+
 
 function getListOfChapters(bookID){
-    let arr = apiGetList(bookID).then((response) =>{
+   return apiGetList(bookID).then((response) =>{
         if(response.status === 200 && response.data !== undefined){
             return response.data;
         }
     })
-    return arr;
 }
 
 const getListOfChaptersFrom = async(bookID, indexFrom) =>{
@@ -38,5 +46,6 @@ export {
     getListOfChapters,
     getListOfChaptersFrom,
     getListOfChaptersUpTo,
-    getCustomListOfChapters
+    getCustomListOfChapters,
+    searchTitle
 }
