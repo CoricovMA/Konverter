@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
 import '../Style/Search.css'
-import {FormLabel, Button, Row, Col, FormControl, Form, Card} from "react-bootstrap";
+import {FormLabel, Button, Row, Col, FormControl, Form, Card, CardDeck} from "react-bootstrap";
 import {searchTitle} from "../Functionality/util";
 import SearchCard from "./SearchCard";
 
@@ -12,9 +12,8 @@ function Search(props) {
     const handleClick = () => {
         if(!input.includes("https") && isNaN(input)){
             searchTitle(input).then((res) =>{
-                res.forEach(e => {
-                    setCards(<SearchCard card={e} />)
-                })
+                setCards(res.map((item, index) => <SearchCard card={item} time={1000} key={index+1} />))
+
             })
         }
     }
@@ -50,9 +49,9 @@ function Search(props) {
                 </Button>
             </Form>
             <div>
-                <Row>
+                <CardDeck className={"search-container"}>
                     {cards}
-                </Row>
+                </CardDeck>
             </div>
         </div>
 
