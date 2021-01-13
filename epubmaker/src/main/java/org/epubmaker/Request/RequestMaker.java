@@ -1,6 +1,7 @@
 package org.epubmaker.Request;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
@@ -16,7 +17,10 @@ import java.util.List;
 public class RequestMaker {
 
     private static final OkHttpClient client = new OkHttpClient().newBuilder().build();
-    private static final ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+    private static final ObjectMapper mapper = new ObjectMapper()
+            .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true)
+            .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true)
+            .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
     public static String doRequest(String url) throws IOException {
         Request request = new Request.Builder()
@@ -70,12 +74,21 @@ public class RequestMaker {
     }
 
     public static void getChapters(String bookID) throws IOException {
-        ChapterList cl = mapper.readValue(getList(bookID), ChapterList.class);
+        JSONObject json = new JSONObject().put("chapterList", new JSONArray(getList(bookID)));
+        ChapterList cl = mapper.readValue(json.toString(), ChapterList.class);
 
-        for(ChapterInfo info: cl.getChapterInfoList()){
-            System.out.println(info.getChapter().getFullChapter());
-            break;
-        }
+        cl.getChapterInfoList().stream().parallel().forEach(
+                ChapterInfo::generateChapter
+        );
+
+        cl.getChapterInfoList().forEach(item ->{
+                System.out.println(item.getChapter().getFullChapter());
+        });
+
+//        for(ChapterInfo info: cl.getChapterInfoList()){
+//            System.out.println(info.getChapter().getFullChapter());
+//            break;
+//        }
 
     }
 
