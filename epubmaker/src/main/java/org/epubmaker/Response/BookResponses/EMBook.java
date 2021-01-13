@@ -8,7 +8,7 @@ public abstract class EMBook {
 
     public abstract Book getBook();
 
-    protected abstract void generateBook();
+    protected abstract void generateBook(long bookID);
 
     protected abstract void generateBook(int upTo);
 

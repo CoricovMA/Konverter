@@ -8,6 +8,7 @@ import nl.siegmann.epublib.domain.Resource;
 import nl.siegmann.epublib.epub.EpubWriter;
 import nl.siegmann.epublib.service.MediatypeService;
 import org.epubmaker.JPMTL.Chapter;
+import org.epubmaker.JPMTL.JPBook;
 import org.epubmaker.JPMTL.JPUtil.JPSearch;
 import org.epubmaker.JPMTL.JPUtil.NovelResponse;
 import org.epubmaker.JPMTL.JPUtil.SearchResponse;
@@ -27,20 +28,26 @@ import java.util.LinkedList;
 public class App {
     public static void main(String[] args) {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("parser", "jpmtl");
-        jsonObject.put("requested", "list");
-
-        JSONObject json = new JSONObject();
-        json.put("url", "something");
-        json.put("request_option", jsonObject);
-        json.put("type", "jp_req");
         try {
-            Request test = new ObjectMapper().readValue(json.toString(), Request.class);
-            System.out.println(test);
-        } catch (IOException e) {
-            e.printStackTrace();
+            RequestMaker.getChapters("295");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
+
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("parser", "jpmtl");
+//        jsonObject.put("requested", "list");
+//
+//        JSONObject json = new JSONObject();
+//        json.put("url", "something");
+//        json.put("request_option", jsonObject);
+//        json.put("type", "jp_req");
+//        try {
+//            Request test = new ObjectMapper().readValue(json.toString(), Request.class);
+//            System.out.println(test);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 //        try {
 //            Book book = new Book();

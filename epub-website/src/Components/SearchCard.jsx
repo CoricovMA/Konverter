@@ -1,10 +1,15 @@
-import {React} from 'react'
-import {Card, Col, CardImg} from 'react-bootstrap'
+import {React, useState} from 'react'
+import {Card, Col, CardImg, Button} from 'react-bootstrap'
 
 function SearchCard(props){
 
-    console.log(props.card.title)
+    const handleCardClick = () =>{
+        console.log("Hello world " + props.card.id)
+    }
+
     console.log(props.card)
+
+
     return (
         <Col sm={4}
              md={4}
@@ -13,6 +18,7 @@ function SearchCard(props){
              style={{
                  marginBottom: "2%",
              }}
+
         >
             <Card className={"result-card"}
                   data-aos="fade-in"
@@ -26,6 +32,9 @@ function SearchCard(props){
                 <Card.Body>
                     {props.card.title}
                 </Card.Body>
+                <Button onClick={handleCardClick}>
+                    Get ebook
+                </Button>
             </Card>
         </Col>
 
