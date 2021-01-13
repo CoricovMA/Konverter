@@ -41,6 +41,7 @@ public class RequestMaker {
         Response response = client.newCall(request).execute();
         return response.body().string();
     }
+
     public static String getList(String bookID) throws IOException {
         Request request = new Request.Builder()
                 .url(String.format("https://jpmtl.com/v2/chapter/%s/list", bookID))
@@ -51,16 +52,16 @@ public class RequestMaker {
         return response.body().string();
     }
 
-    public static String getJPChapter(long chapter) throws IOException{
+    public static String getJPChapter(long chapter) throws IOException {
         return getJPChapter(String.valueOf(chapter));
     }
 
-    public static Chapter getChapterObject(long id) throws IOException{
+    public static Chapter getChapterObject(long id) throws IOException {
         return mapper.readValue(getJPChapter(String.valueOf(id)), Chapter.class);
     }
 
 
-    public static JPBook getJPBook(String book) throws IOException{
+    public static JPBook getJPBook(String book) throws IOException {
 
         Request request = new Request.Builder()
                 .url(String.format("https://jpmtl.com/v2/chapter/%s/list?structured=true", book))
@@ -73,7 +74,7 @@ public class RequestMaker {
         return mapper.readValue(obj.toString(), JPBook.class);
     }
 
-    public static void getChapters(String bookID) throws IOException {
+    public static ChapterList getChapters(String bookID) throws IOException {
         JSONObject json = new JSONObject().put("chapterList", new JSONArray(getList(bookID)));
         ChapterList cl = mapper.readValue(json.toString(), ChapterList.class);
 
@@ -81,14 +82,7 @@ public class RequestMaker {
                 ChapterInfo::generateChapter
         );
 
-        cl.getChapterInfoList().forEach(item ->{
-                System.out.println(item.getChapter().getFullChapter());
-        });
-
-//        for(ChapterInfo info: cl.getChapterInfoList()){
-//            System.out.println(info.getChapter().getFullChapter());
-//            break;
-//        }
+        return cl;
 
     }
 
