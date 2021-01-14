@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.epubmaker.Request.RequestMaker;
 
 import java.io.IOException;
@@ -13,6 +15,8 @@ import java.io.IOException;
 public class ChapterInfo {
 
     private static final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private static final Logger logger = LogManager.getLogger(ChapterInfo.class);
+
 
     @JsonProperty("title")
     private String title;
@@ -42,9 +46,11 @@ public class ChapterInfo {
 
     public void generateChapter(){
         try {
+
             this.chapter = RequestMaker.getChapterObject(this.chapterID);
+
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+            logger.warn("There was an error fetching chapter. {}", ioException.getMessage());
         }
     }
 

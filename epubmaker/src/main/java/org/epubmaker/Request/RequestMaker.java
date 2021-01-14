@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.epubmaker.JPMTL.Chapter;
 import org.epubmaker.JPMTL.ChapterInfo;
 import org.epubmaker.JPMTL.ChapterList;
@@ -22,6 +24,9 @@ public class RequestMaker {
             .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true)
             .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true)
             .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
+    private static final Logger logger = LogManager.getLogger(RequestMaker.class);
+
 
     public static String doRequest(String url) throws IOException {
         Request request = new Request.Builder()
@@ -76,13 +81,24 @@ public class RequestMaker {
     }
 
     public static JPBook getChapters(String bookID, String bookTitle) throws IOException {
-        
+
+        logger.info("Retrieving chapters for Book: {}", bookTitle);
+
+        long start = System.currentTimeMillis();
+
         JSONObject json = new JSONObject().put("chapterList", new JSONArray(getList(bookID)));
         ChapterList cl = mapper.readValue(json.toString(), ChapterList.class);
+
+        logger.info("Chapter list retrieved. Action took: {}ms", (System.currentTimeMillis() - start));
+
+        logger.info("Retrieving chapters. Parallel streams.");
+        start = System.currentTimeMillis();
 
         cl.getChapterInfoList().stream().parallel().forEach(
                 ChapterInfo::generateChapter
         );
+
+        logger.info("Chapters retrieved and generated. Action took: {}ms.", (System.currentTimeMillis() - start));
 
         return new JPBook(cl, bookTitle);
 
