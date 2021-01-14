@@ -1,18 +1,19 @@
 package org.epubmaker.Request;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
-import okhttp3.Response;
 import okhttp3.Request;
-import org.epubmaker.JPMTL.*;
+import okhttp3.Response;
+import org.epubmaker.JPMTL.Chapter;
+import org.epubmaker.JPMTL.ChapterInfo;
+import org.epubmaker.JPMTL.ChapterList;
+import org.epubmaker.JPMTL.JPBook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
 
 public class RequestMaker {
 
@@ -74,7 +75,8 @@ public class RequestMaker {
         return mapper.readValue(obj.toString(), JPBook.class);
     }
 
-    public static ChapterList getChapters(String bookID) throws IOException {
+    public static JPBook getChapters(String bookID, String bookTitle) throws IOException {
+        
         JSONObject json = new JSONObject().put("chapterList", new JSONArray(getList(bookID)));
         ChapterList cl = mapper.readValue(json.toString(), ChapterList.class);
 
@@ -82,7 +84,7 @@ public class RequestMaker {
                 ChapterInfo::generateChapter
         );
 
-        return cl;
+        return new JPBook(cl, bookTitle);
 
     }
 

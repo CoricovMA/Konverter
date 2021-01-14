@@ -4,8 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -14,8 +13,6 @@ public class JPSearch {
 
     private static ObjectMapper mapper;
     private static OkHttpClient client;
-
-    private static final Logger logger = LogManager.getLogger(JPSearch.class);
 
     public static void init(){
         mapper = new ObjectMapper();
@@ -51,7 +48,7 @@ public class JPSearch {
 
             return mapper.readValue(s, NovelResponse.class);
         } catch (IOException e) {
-            logger.warn("There was an error finding a book. Book id: {}", bookId);
+
         }
 
         return null;

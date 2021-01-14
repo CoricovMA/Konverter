@@ -3,8 +3,7 @@ package org.epubmaker.JPMTL;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import nl.siegmann.epublib.domain.*;
-import nl.siegmann.epublib.service.MediatypeService;
+import nl.siegmann.epublib.domain.TOCReference;
 import org.epubmaker.Request.BaseObject;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -36,4 +35,9 @@ public class Chapter implements BaseObject {
     public String getHtml(){
         return content.prettyParagraphs();
     }
+
+    public String getTitle(){
+        return this.content.getTitle();
+    }
+
 }
