@@ -3,8 +3,10 @@ import {Card, Col, CardImg, Button} from 'react-bootstrap'
 
 function SearchCard(props){
 
+    const [downBtn, setDownBtn] = useState("");
+
     const handleCardClick = () =>{
-        console.log("Hello world " + props.card.id)
+        
     }
 
     console.log(props.card)
@@ -21,8 +23,6 @@ function SearchCard(props){
 
         >
             <Card className={"result-card"}
-                  data-aos="fade-in"
-                  data-aos-duration={props.time}
 
             >
                 <CardImg src={props.card.cover}
@@ -35,6 +35,7 @@ function SearchCard(props){
                 <Button onClick={handleCardClick}>
                     Get ebook
                 </Button>
+                {downBtn}
             </Card>
         </Col>
 

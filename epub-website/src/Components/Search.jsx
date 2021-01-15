@@ -12,8 +12,10 @@ function Search(props) {
     const handleClick = () => {
         if(!input.includes("https") && isNaN(input)){
             searchTitle(input).then((res) =>{
-                setCards(res.map((item, index) => <SearchCard card={item} time={1000} key={index+1} />))
-
+                if(cards !== undefined && cards.length !== 0){
+                    setCards([])
+                }
+                setCards(res.map((item, index) => <SearchCard card={item} key={index+1} />))
             })
         }
     }
