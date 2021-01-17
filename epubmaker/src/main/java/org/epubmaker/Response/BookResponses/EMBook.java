@@ -1,16 +1,15 @@
 package org.epubmaker.Response.BookResponses;
 
 import nl.siegmann.epublib.domain.Book;
+import nl.siegmann.epublib.epub.EpubWriter;
 
 public abstract class EMBook {
 
+    protected static final EpubWriter writer = new EpubWriter();
+
     protected Book book;
 
-    public abstract Book getBook();
+    public abstract byte[] getBookAsBytes();
 
-    protected abstract void generateBook(long bookID);
-
-    protected abstract void generateBook(int upTo);
-
-    protected abstract void generateBook(int from, int to);
+    public abstract String getTitle();
 }
