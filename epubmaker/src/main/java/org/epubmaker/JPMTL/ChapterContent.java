@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.siegmann.epublib.domain.Resource;
 import nl.siegmann.epublib.service.MediatypeService;
 import org.epubmaker.Util.EMObject;
+import org.epubmaker.Util.HtmlMaker;
 
 import java.util.List;
 
@@ -39,19 +40,16 @@ public class ChapterContent implements EMObject {
 
     public String getContentAsHtml() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<div>");
         sb.append(this.getTitleHtml());
 
         content.forEach(paragraph ->
                 {
-                    sb.append(String.format("<p>%s</p>", paragraph.getContent().trim().strip()));
+                    sb.append(HtmlMaker.getParagraph(paragraph.getContent().trim().strip()));
                 }
 
         );
 
-        sb.append("</div>");
-
-        return sb.toString();
+        return HtmlMaker.getDiv(sb.toString());
     }
 
     public Resource getAsResource() {
@@ -72,13 +70,12 @@ public class ChapterContent implements EMObject {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<div>");
-        sb.append(String.format("<h1>%s</h1>", this.getTitle()));
+        sb.append(HtmlMaker.getTitle(this.getTitle()));
         int count = 0;
         StringBuilder inner = new StringBuilder();
         for (String s : arr) {
             if (count == 5) {
-                sb.append(String.format("<p>%s</p>", inner.toString()));
+                sb.append(HtmlMaker.getParagraph(inner.toString()));
                 inner = new StringBuilder();
                 inner.append(String.format("%s. ", s));
                 count = 1;
@@ -87,8 +84,6 @@ public class ChapterContent implements EMObject {
                 inner.append(String.format("%s. ", s));
             }
         }
-        sb.append("</div>");
-
-        return sb.toString();
+        return HtmlMaker.getDiv(sb.toString());
     }
 }

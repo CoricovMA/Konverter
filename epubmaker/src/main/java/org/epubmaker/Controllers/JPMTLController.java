@@ -25,6 +25,7 @@ public class JPMTLController {
             method = RequestMethod.GET,
             produces = "application/epub+zip"
     )
+
     public void handleGetBook(
             HttpServletResponse response,
             @PathVariable String bookTitle, @PathVariable String bookID) {
