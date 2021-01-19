@@ -28,9 +28,9 @@ public class ConvertController {
     )
     public ResponseEntity<byte []> handleConvertText(
             @RequestParam("file") MultipartFile file,
-            @RequestParam(value = "delimiter", required = false ) String delimiter)
+            @RequestParam(value = "delimiter", required = false, defaultValue = "") String delimiter)
     {
-        if(!FilenameUtils.isExtension(file.getName(), ".txt")) {
+        if(!FilenameUtils.isExtension(file.getOriginalFilename(), "txt")) {
             logger.info("Received a request with a wrong file format. File: \"{}\".", file.getName());
             return ResponseEntity
                     .badRequest()
