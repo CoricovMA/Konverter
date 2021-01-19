@@ -41,8 +41,9 @@ public class ConvertController {
         long start = System.currentTimeMillis();
 
         try {
-
-            book = new BasicBook(file.getBytes(), delimiter);
+            book = new BasicBook(file.getBytes(),
+                    delimiter,
+                    file.getName().split("\\.")[0]);
 
         } catch (IOException ioException) {
 
