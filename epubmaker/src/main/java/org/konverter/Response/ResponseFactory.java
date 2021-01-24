@@ -2,7 +2,7 @@ package org.konverter.Response;
 
 public class ResponseFactory {
 
-    public static Response getResponse(Request request){
+    public static Response getResponse(){
 //        switch (request.type){
 //            case JPM:
 //                return null;
