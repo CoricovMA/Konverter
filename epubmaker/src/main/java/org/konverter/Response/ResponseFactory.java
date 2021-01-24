@@ -1,7 +1,5 @@
 package org.konverter.Response;
 
-import org.konverter.Request.Request;
-
 public class ResponseFactory {
 
     public static Response getResponse(Request request){

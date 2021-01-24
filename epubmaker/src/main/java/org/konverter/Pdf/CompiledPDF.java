@@ -7,7 +7,6 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.graphics.image.JPEGFactory;
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -21,12 +20,14 @@ public class CompiledPDF {
 
     private static final Logger logger = LogManager.getLogger(CompiledPDF.class);
     private final List<BufferedImage> imageList;
+    private final List<PDFImagePage> pages;
     private final PDDocument document;
     private final ByteArrayOutputStream outputStream;
     private byte [] finalPdfBytes;
 
     public CompiledPDF(){
         this.imageList = new ArrayList<>();
+        this.pages = new ArrayList<>();
         this.document = new PDDocument();
         this.outputStream = new ByteArrayOutputStream();
     }
@@ -45,9 +46,15 @@ public class CompiledPDF {
     private void addPages() throws IOException {
         for(BufferedImage image: imageList){
             PDPage page = new PDPage();
+
+            this.document.addPage(page);
+
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
-            PDImageXObject imgObj = JPEGFactory.createFromImage(document, image);
-            contentStream.drawImage(imgObj, 0, 0, PDRectangle.A4.getWidth(), PDRectangle.A4.getHeight());
+            contentStream.drawImage(JPEGFactory.createFromImage(document, image),
+                    0, 0,
+                    PDRectangle.A4.getWidth(),
+                    PDRectangle.A4.getHeight());
+
             contentStream.close();
         }
     }
@@ -55,4 +62,6 @@ public class CompiledPDF {
     public byte[] getFinalPdfBytes() {
         return finalPdfBytes;
     }
+
+
 }

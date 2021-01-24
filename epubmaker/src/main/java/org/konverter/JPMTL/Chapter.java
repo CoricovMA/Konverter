@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import nl.siegmann.epublib.domain.TOCReference;
-import org.konverter.Request.BaseObject;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Chapter implements BaseObject {
