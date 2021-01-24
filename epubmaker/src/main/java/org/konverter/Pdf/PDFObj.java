@@ -10,15 +10,20 @@ import org.apache.pdfbox.pdmodel.graphics.image.JPEGFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 import javax.imageio.ImageIO;
+import javax.print.Doc;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PDFObj {
 
     private static final Logger logger = LogManager.getLogger(PDFObj.class);
+    private final List<BufferedImage> imageList = new ArrayList<>();
+    private final PDDocument document = new PDDocument();
     private final byte [] pictureBytes;
     private byte [] pdfBytes;
     private String pictureFormat;
@@ -37,6 +42,10 @@ public class PDFObj {
         this.pictureFormat = format;
         this.pictureName = name;
         generatePDF();
+    }
+
+    public void addPicture(byte [] givenBytes) throws IOException {
+        imageList.add(ImageIO.read((new ByteArrayInputStream(givenBytes))));
     }
 
     private void generatePDF() throws IOException {

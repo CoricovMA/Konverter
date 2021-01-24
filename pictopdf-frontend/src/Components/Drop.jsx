@@ -78,7 +78,24 @@ function Drop(props) {
     const onClickConvert = () =>{
         postFiles(props.req, props.extra, files)
             .then((res) =>{
-                console.log(res)
+                const url = window.URL.createObjectURL(new Blob([res.data]))
+                if(btn !== undefined){
+                    setBtn(undefined)
+                }
+
+                setBtn(
+                    <a
+                        className={`btn shadow `}
+                        id={`${props.req}-drop`}
+                        href={url}
+                        download={`${files[0].name.split(".")[0]}.${props.req}`}
+                        data-aos={"zoom-in-up"}
+                        data-aos-duration={1000}
+                    >
+                        <strong>Download</strong>
+                    </a>
+                )
+
             }).catch((err) =>{
                 console.log(err)
             })
@@ -141,15 +158,15 @@ function Drop(props) {
                 justifyContent: "center"
             }}>
                 <Row>
-                    <Button
+                    {btn? btn : <Button
                         variant={"success"}
                         onClick={onClickConvert}
                         style={{
-                            marginTop:"20px"
+                            marginTop: "20px"
                         }}
                     >
                         Convert
-                    </Button>
+                    </Button>}
                 </Row>
                 <Row>
                     <Col>

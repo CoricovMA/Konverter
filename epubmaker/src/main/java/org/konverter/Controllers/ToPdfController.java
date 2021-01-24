@@ -1,5 +1,8 @@
 package org.konverter.Controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.konverter.Pdf.CompiledPDF;
 import org.konverter.Pdf.PDFObj;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,10 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
 public class ToPdfController {
+
+    private static final Logger logger = LogManager.getLogger(ToPdfController.class);
 
     @RequestMapping(
             value = "/convert/pdf",
@@ -24,23 +30,43 @@ public class ToPdfController {
     )
     @ResponseBody
     public ResponseEntity<byte[]> handleFileUpload(@RequestParam("files") List<MultipartFile> files) {
+        logger.info("Received {} files. Converting.", files.size());
+        long start = System.currentTimeMillis();
+        long startToFinish = System.currentTimeMillis();
         try {
+
+            CompiledPDF pdf = new CompiledPDF();
+
+            logger.info("Generating picture pages.");
+
             for(MultipartFile file: files){
-                PDFObj obj = new PDFObj(file.getBytes());
-                return ResponseEntity
-                        .ok()
-                        .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=\"%s.pdf\"",
-                                file.getOriginalFilename().split("\\.")[0]))
-                        .contentType(MediaType.APPLICATION_PDF)
-                        .body(obj.getPdfBytes());
+                pdf.addImage(file.getBytes());
             }
 
-        } catch (IOException e) {
+            logger.info("Pictures added to pages. Action took {}ms.", (System.currentTimeMillis() - start));
+            start = System.currentTimeMillis();
 
-            e.printStackTrace();
+            logger.info("Generating pdf.");
+
+            pdf.generatePdf();
+
+            logger.info("Pdf Generated. Action took {}ms.", (System.currentTimeMillis() - start));
+            logger.info("Total conversion took {}ms.", (System.currentTimeMillis() - startToFinish));
+
+            return ResponseEntity
+                    .ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=\"%s.pdf\"",
+                            files.get(0).getOriginalFilename().split("\\.")[0]))
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdf.getFinalPdfBytes());
+        } catch (IOException e) {
+            logger.warn("Something went wrong. {}.", e.getMessage());
+            return ResponseEntity
+                    .badRequest()
+                    .body("".getBytes(StandardCharsets.UTF_8));
         }
 
-        return null;
+
     }
 
 }
