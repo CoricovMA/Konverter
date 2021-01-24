@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.epubmaker</groupId>
-    <artifactId>epubmaker</artifactId>
+    <groupId>org.konverter</groupId>
+    <artifactId>konverter</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>epubmaker</name>
+    <name>konverter</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
     <parent>
@@ -148,7 +148,7 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>2.0.6.RELEASE</version>
                     <configuration>
-                        <mainClass>org.epubmaker.App</mainClass>
+                        <mainClass>org.konverter.App</mainClass>
                     </configuration>
                 </plugin>
             </plugins>
@@ -159,7 +159,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.0.6.RELEASE</version>
                 <configuration>
-                    <mainClass>org.epubmaker.App</mainClass>
+                    <mainClass>org.konverter.App</mainClass>
                 </configuration>
             </plugin>
             <plugin>

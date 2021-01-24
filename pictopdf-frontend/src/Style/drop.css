@@ -1,0 +1,28 @@
+.drop-box{
+    width: 345px;
+    height: 180px;
+    border: 2px solid darkgray;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    background-color: white;
+}
+
+.input-button{
+    width: 80%;
+    margin: 10% 10% 8px;
+}
+
+.drop-text{
+    color: grey;
+}
+
+#epub-drop{
+    background-color: aliceblue;
+    margin-top: 40px;
+}
+
+#pdf-drop{
+    background-color: lightskyblue;
+    margin-top: 20px;
+}
