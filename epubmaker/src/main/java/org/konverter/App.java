@@ -58,12 +58,17 @@ public class App {
     }
 
     public static double getScale(float originalW, float originalH, float maxW, float maxH){
-        if((originalW < maxW) && (originalH < maxH)){
+        if(!needsResize(originalW, originalH)){
             return 1.0;
         }else{
-            return 0;
+            return Math.min(
+                    (maxH/originalH), (maxW/originalW)
+            );
         }
 
     }
 
+    public static boolean needsResize(float originalW, float originalH){
+        return (originalH < PDRectangle.A4.getHeight()) || (originalW < PDRectangle.A4.getWidth());
+    }
 }

@@ -39,8 +39,8 @@ public class PDFImagePage {
     }
 
     private boolean shouldResize(){
-        return (this.bufferedImage.getHeight() > MAX_HEIGHT)
-                &&  (this.bufferedImage.getWidth() > MAX_WIDTH);
+        return (this.bufferedImage.getHeight() > PDRectangle.A4.getHeight())
+                || (this.bufferedImage.getWidth() > PDRectangle.A4.getWidth());
     }
 
 }
