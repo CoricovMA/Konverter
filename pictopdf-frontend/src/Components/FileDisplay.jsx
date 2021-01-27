@@ -49,7 +49,7 @@ export default function FileDisplay(props){
             xs={6}
         >
             <img
-                className={"shadow"}
+                className={"shadow pic-display"}
                 style={{
                     marginTop:"20px"
                 }}
