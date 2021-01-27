@@ -40,7 +40,11 @@ public class ToPdfController {
             logger.info("Generating picture pages.");
 
             for(MultipartFile file: files){
-                pdf.addImage(file.getBytes());
+                try {
+                    pdf.addImage(file.getBytes());
+                }catch (IOException e){
+                    logger.warn("Something went wrong. {}", e.getMessage());
+                }
             }
 
             logger.info("Pictures added to pages. Action took {}ms.", (System.currentTimeMillis() - start));

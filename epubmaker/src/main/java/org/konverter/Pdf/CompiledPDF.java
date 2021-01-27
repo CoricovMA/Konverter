@@ -19,7 +19,7 @@ import java.util.List;
 public class CompiledPDF {
 
     private static final Logger logger = LogManager.getLogger(CompiledPDF.class);
-    private final List<BufferedImage> imageList;
+    private final List<PDFImagePage> imageList;
     private final List<PDFImagePage> pages;
     private final PDDocument document;
     private final ByteArrayOutputStream outputStream;
@@ -33,35 +33,42 @@ public class CompiledPDF {
     }
 
     public void addImage(byte[] imageBytes) throws IOException {
-        imageList.add(ImageIO.read(new ByteArrayInputStream(imageBytes)));
+        imageList.add(new PDFImagePage(ImageIO.read(new ByteArrayInputStream(imageBytes))));
     }
 
     public void generatePdf() throws IOException {
-        addPages();
+        compilePDF();
         document.save(outputStream);
         document.close();
         this.finalPdfBytes = outputStream.toByteArray();
     }
 
-    private void addPages() throws IOException {
-        for(BufferedImage image: imageList){
-            PDPage page = new PDPage();
-
-            this.document.addPage(page);
-
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
-            contentStream.drawImage(JPEGFactory.createFromImage(document, image),
-                    0, 0,
-                    PDRectangle.A4.getWidth(),
-                    PDRectangle.A4.getHeight());
-
-            contentStream.close();
-        }
+    private void compilePDF() throws IOException {
+        resizePages();
+        addPagesToPdf();
     }
 
     public byte[] getFinalPdfBytes() {
         return finalPdfBytes;
     }
 
+    private void resizePages(){
+        imageList.stream().parallel().forEach(PDFImagePage::resize);
+    }
+    
+    private void addPagesToPdf() throws IOException {
+        for(PDFImagePage image: imageList){
+            PDPage page = new PDPage();
 
+            this.document.addPage(page);
+
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+            contentStream.drawImage(JPEGFactory.createFromImage(document, image.getImage()),
+                    0, 0,
+                    image.width(),
+                    image.height());
+
+            contentStream.close();
+        }
+    }
 }
