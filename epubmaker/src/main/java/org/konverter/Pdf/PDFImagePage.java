@@ -14,15 +14,8 @@ public class PDFImagePage {
 
     private static final Logger logger = LogManager.getLogger(PDFImagePage.class);
 
-    private int distanceW = 0;
-    private int distanceH = 0;
-
     private final Document doc;
     private Image image;
-    private final float MAX_WIDTH = PDRectangle.A4.getWidth();
-    private final float MAX_HEIGHT = PDRectangle.A4.getHeight();
-
-    private boolean shouldResize;
 
     public PDFImagePage(byte[] bytes, Document doc) throws IOException, BadElementException {
         this.image = Image.getInstance(bytes);

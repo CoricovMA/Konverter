@@ -65,7 +65,7 @@ public class ToPdfController {
                             files.get(0).getOriginalFilename().split("\\.")[0]))
                     .contentType(MediaType.APPLICATION_PDF)
                     .body(pdf.getFinalPdfBytes());
-        } catch (IOException | DocumentException e) {
+        } catch ( DocumentException e) {
             logger.warn("Something went wrong. {}.", e.getMessage());
             return ResponseEntity
                     .badRequest()

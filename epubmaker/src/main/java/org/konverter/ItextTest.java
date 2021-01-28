@@ -21,6 +21,7 @@ public class ItextTest {
             Document doc = new Document();
             PdfWriter writer = PdfWriter.getInstance(doc, fos);
             doc.open();
+            doc.newPage();
             Image image = Image.getInstance("test2.png");
             image.setAlignment(Element.ALIGN_CENTER);
             System.out.println(image.isScaleToFitHeight());
@@ -29,6 +30,8 @@ public class ItextTest {
             System.out.println(image.getScaledWidth());
             System.out.println(doc.getPageSize());
             image.scaleToFit(doc.getPageSize());
+            doc.add(image);
+            doc.newPage();
             doc.add(image);
             doc.close();
         } catch (DocumentException | IOException e) {

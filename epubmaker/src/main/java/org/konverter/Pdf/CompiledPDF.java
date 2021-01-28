@@ -16,15 +16,12 @@ public class CompiledPDF {
 
     private static final Logger logger = LogManager.getLogger(CompiledPDF.class);
     private final List<PDFImagePage> imageList;
-    private final List<PDFImagePage> pages;
     private final Document document;
     private final ByteArrayOutputStream outputStream;
-    private byte [] finalPdfBytes;
     private final PdfWriter writer;
 
     public CompiledPDF() throws DocumentException {
         this.imageList = new ArrayList<>();
-        this.pages = new ArrayList<>();
         this.document = new Document();
         this.outputStream = new ByteArrayOutputStream();
         this.writer = PdfWriter.getInstance(this.document, this.outputStream);
@@ -34,42 +31,45 @@ public class CompiledPDF {
         imageList.add(new PDFImagePage(imageBytes, document));
     }
 
-    public void generatePdf() throws IOException {
-//        compilePDF();
-//        document.save(outputStream);
-//        document.close();
-//        this.finalPdfBytes = outputStream.toByteArray();
+    public void generatePdf(){
+        compilePDF();
+        document.close();
     }
 
-    private void compilePDF() throws IOException {
+    private void compilePDF() {
         resizePages();
         addPagesToPdf();
     }
 
     public byte[] getFinalPdfBytes() {
-        return finalPdfBytes;
+        return outputStream.toByteArray();
     }
 
-    private void resizePages(){
+    private void resizePages() {
+        logger.info("Resizing pages.");
+        long start = System.currentTimeMillis();
+
         imageList.stream().parallel().forEach(
                 PDFImagePage::resize
         );
-    }
-    
-    private void addPagesToPdf() throws IOException {
 
-//        for(PDFImagePage image: imageList){
-//            PDPage page = new PDPage();
-//
-//            this.document.addPage(page);
-//
-//            PDPageContentStream contentStream = new PDPageContentStream(document, page);
-//            contentStream.drawImage(JPEGFactory.createFromImage(document, image.getImage()),
-//                    0, 0,
-//                    image.width(),
-//                    image.height());
-//
-//            contentStream.close();
-//        }
+        logger.info("Resizing completed. {}ms.", (System.currentTimeMillis() - start));
+    }
+
+    private void addPagesToPdf() {
+        logger.info("Adding pages to pdf.");
+        long start = System.currentTimeMillis();
+        this.document.open();
+        imageList.forEach(image -> {
+            document.newPage();
+            try {
+                document.add(image.getImage());
+            } catch (DocumentException e) {
+                logger.warn("Error while adding image to document. {}", e.getMessage());
+            }
+        });
+
+        logger.info("Pages added. Action took {}ms.", (System.currentTimeMillis() - start));
+
     }
 }
