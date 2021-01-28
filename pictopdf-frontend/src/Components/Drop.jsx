@@ -28,15 +28,22 @@ function Drop(props) {
             }
 
             reader.onload = () =>{
-                fileArr.push(<FileDisplay
-                    file={file}
-                    key={fileArr.length+1}
-                    duration={fileArr.length*1000}
-                />)
-                setFileDisplay(fileDisplay)
-                setFileDisplay(fileArr)
-                files.push(file)
-                setFiles(files)
+                console.log(file.type.split("/")[0])
+                if(file.type.split("/")[0] !== "image"){
+                    alert("Wrong file type.")
+
+                }else{
+                    fileArr.push(<FileDisplay
+                        file={file}
+                        key={fileArr.length+1}
+                        duration={fileArr.length*1000}
+                    />)
+                    setFileDisplay(fileDisplay)
+                    setFileDisplay(fileArr)
+                    files.push(file)
+                    setFiles(files)
+                }
+
             }
             reader.readAsArrayBuffer(file)
 
@@ -158,7 +165,7 @@ function Drop(props) {
                 justifyContent: "center"
             }}>
                 <Row>
-                    {btn? btn : <Button
+                    {btn ? btn : <Button
                         variant={"success"}
                         onClick={onClickConvert}
                         style={{
@@ -167,11 +174,6 @@ function Drop(props) {
                     >
                         Convert
                     </Button>}
-                </Row>
-                <Row>
-                    <Col>
-                        {btn}
-                    </Col>
                 </Row>
             </Container>
         </div>

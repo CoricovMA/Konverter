@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Col} from "react-bootstrap";
-
+import '../Style/display.css'
 
 export default function FileDisplay(props){
     // const [files, setFiles] = useState([])
@@ -38,11 +38,8 @@ export default function FileDisplay(props){
     // )
     return (
         <Col
-            style={{
-                borderRadius:"5px",
-                height: "130px",
-                width: "180px",
-            }}
+            className={"col-display"}
+
             lg={3}
             md={4}
             sm={4}

@@ -1,5 +1,7 @@
 package org.konverter.Controllers;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.DocumentException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.konverter.Pdf.CompiledPDF;
@@ -42,8 +44,8 @@ public class ToPdfController {
             for(MultipartFile file: files){
                 try {
                     pdf.addImage(file.getBytes());
-                }catch (IOException e){
-                    logger.warn("Something went wrong. {}", e.getMessage());
+                }catch (IOException | BadElementException e){
+                    logger.warn("Something went adding files to pdf wrong. {}", e.getMessage());
                 }
             }
 
@@ -63,7 +65,7 @@ public class ToPdfController {
                             files.get(0).getOriginalFilename().split("\\.")[0]))
                     .contentType(MediaType.APPLICATION_PDF)
                     .body(pdf.getFinalPdfBytes());
-        } catch (IOException e) {
+        } catch (IOException | DocumentException e) {
             logger.warn("Something went wrong. {}.", e.getMessage());
             return ResponseEntity
                     .badRequest()
