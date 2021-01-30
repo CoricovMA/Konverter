@@ -3,49 +3,18 @@ import {Col} from "react-bootstrap";
 import '../Style/display.css'
 
 export default function FileDisplay(props){
-    // const [files, setFiles] = useState([])
-    // const [imgs, setImgs] = useState([])
-    //
-    // const createImages = () =>{
-    //     let arr = []
-    //     let count = 1;
-    //     files.forEach(img =>{
-    //         console.log(`for each${img}`)
-    //         arr.push(
-    //             <img
-    //                 src={img? URL.createObjectURL(img) : null}
-    //                 alt={img? img.name : null}
-    //                 key={count}
-    //             />
-    //         )
-    //         count++;
-    //     })
-    //     setImgs(arr);
-    // }
-    //
-    // const handleUpload = (e) =>{
-    //     console.log(e)
-    //     files.push(e.target.files[0])
-    //     setFiles(files);
-    //     createImages();
-    // }
-    //
-    // return (
-    //     <div>
-    //         {imgs}
-    //         <input type="file" onChange={handleUpload}/>
-    //     </div>
-    // )
+
     return (
         <Col
             className={"col-display"}
 
-            lg={3}
-            md={4}
-            sm={4}
-            xs={6}
+            lg={2}
+            md={2}
+            sm={2}
+            xs={2}
         >
             <img
+                data-aos={"fade-in"}
                 className={"shadow pic-display"}
                 style={{
                     marginTop:"20px"

@@ -37,7 +37,7 @@ public class ToPdfController {
         long startToFinish = System.currentTimeMillis();
         try {
 
-            CompiledPDF pdf = new CompiledPDF();
+            CompiledPDF pdf = new CompiledPDF().setPages(files.size());
 
             logger.info("Generating picture pages.");
 

@@ -33,13 +33,12 @@ function Drop(props) {
                     alert("Wrong file type.")
 
                 }else{
-                    fileArr.push(<FileDisplay
+
+                    setFileDisplay(fileDisplay => fileDisplay.concat(<FileDisplay
                         file={file}
                         key={fileArr.length+1}
                         duration={fileArr.length*1000}
-                    />)
-                    setFileDisplay(fileDisplay)
-                    setFileDisplay(fileArr)
+                    />))
                     files.push(file)
                     setFiles(files)
                 }
@@ -48,39 +47,15 @@ function Drop(props) {
             reader.readAsArrayBuffer(file)
 
         })
-        // acceptedFiles.forEach((file) =>{
-        //     const reader = new FileReader()
-        //
-        //     console.log(props)
-        //
-        //     reader.onabort = () => console.log("Aborting file reading.")
-        //     reader.onerror = () => console.log("Error while reading file")
-        //     reader.onload = () => {
-        //         postFile(file, props.req, props.extra)
-        //             .then((res) =>{
-        //                 const url = window.URL.createObjectURL(new Blob([res.data]));
-        //                 if(btn !== undefined){
-        //                     setBtn(undefined);
-        //                 }
-        //                 setBtn(
-        //                     <a
-        //                         className={`btn shadow `}
-        //                         id={`${props.req}-drop`}
-        //                         href={url}
-        //                         download={`${file.name.split(".")[0]}.${props.req}`}
-        //                         data-aos={"zoom-in-up"}
-        //                         data-aos-duration={1000}
-        //                     >
-        //                         <strong>Download</strong>
-        //                     </a>
-        //                 )
-        //             })
-        //
-        //     }
-        //
-        //     reader.readAsArrayBuffer(file);
-        // })
+
     }, [])
+
+
+    const handleReset = () =>{
+        setBtn()
+        setFiles()
+        setFileDisplay()
+    }
 
     const onClickConvert = () =>{
         postFiles(props.req, props.extra, files)
@@ -112,15 +87,11 @@ function Drop(props) {
         <div style={{
             paddingTop: "5%%"
         }}>
-            <Container style={{
-                display: "flex",
-                justifyContent: "center",
-                marginBottom: "20px"
-            }}>
+            <div className={"file-display"}>
                 <Row>
                     {fileDisplay}
                 </Row>
-            </Container>
+            </div>
             <Container style={{
                 display: "flex",
                 justifyContent: "center"
@@ -165,16 +136,33 @@ function Drop(props) {
                 justifyContent: "center"
             }}>
                 <Row>
-                    {btn ? btn : <Button
-                        variant={"success"}
-                        onClick={onClickConvert}
-                        style={{
-                            marginTop: "20px"
-                        }}
-                    >
-                        Convert
-                    </Button>}
+                    <Col>
+                        {btn ? btn : <Button
+                            variant={"success"}
+                            onClick={onClickConvert}
+                            style={{
+                                marginTop: "20px"
+                            }}
+                        >
+                            Convert
+                        </Button>}
+                    </Col>
+                    <Col>
+                        {
+                            btn ? <Button variant={"danger"}
+                                          className={"shadow"}
+                                          style={{
+                                              marginTop:"20px"
+                                          }}
+                                          data-aos={"fade-up"}
+                                          onClick={handleReset}
+                            >
+                                Reset
+                            </Button> : null
+                        }
+                    </Col>
                 </Row>
+
             </Container>
         </div>
 
