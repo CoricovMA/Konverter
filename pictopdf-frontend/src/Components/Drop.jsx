@@ -29,20 +29,27 @@ function Drop(props) {
 
             reader.onload = () =>{
                 console.log(file.type.split("/")[0])
-                if(file.type.split("/")[0] !== "image"){
-                    alert("Wrong file type.")
 
-                }else{
+                switch (props.req) {
+                    case "pdf":
+                        if(file.type.split("/")[0] !== "image"){
+                            alert("Wrong file type.")
+                        }else{
 
-                    setFileDisplay(fileDisplay => fileDisplay.concat(<FileDisplay
-                        file={file}
-                        key={fileArr.length+1}
-                        duration={fileArr.length*1000}
-                    />))
-                    files.push(file)
-                    setFiles(files)
+                            setFileDisplay(fileDisplay => fileDisplay.concat(<FileDisplay
+                                file={file}
+                                key={fileArr.length+1}
+                                duration={fileArr.length*1000}
+                            />))
+
+                        }
+                    case "epub":
+                    default:
+                        console.log(`Got new file. ${files}`)
                 }
 
+                files.push(file)
+                setFiles(files)
             }
             reader.readAsArrayBuffer(file)
 
@@ -84,8 +91,11 @@ function Drop(props) {
     }
 
     return (
-        <div style={{
-            paddingTop: "5%%"
+        <div
+            data-aos={"fade-down"}
+            data-aos-duration={"2000"}
+            style={{
+            paddingTop: "10%"
         }}>
             <div className={"file-display"}>
                 <Row>
@@ -141,7 +151,8 @@ function Drop(props) {
                             variant={"success"}
                             onClick={onClickConvert}
                             style={{
-                                marginTop: "20px"
+                                marginTop: "20px",
+                                marginLeft: "25%"
                             }}
                         >
                             Convert

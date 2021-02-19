@@ -1,0 +1,10 @@
+.option-card{
+    margin-top: 10%;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+
+.option-card:hover{
+    top: -10px;
+}
