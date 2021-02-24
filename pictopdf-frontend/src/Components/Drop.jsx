@@ -60,11 +60,14 @@ function Drop(props) {
 
     const handleReset = () =>{
         setBtn()
-        setFiles()
-        setFileDisplay()
+        setFiles([])
+        setFileDisplay([])
     }
 
     const onClickConvert = () =>{
+        if(files.length === 0){
+            return;
+        }
         postFiles(props.req, props.extra, files)
             .then((res) =>{
                 const url = window.URL.createObjectURL(new Blob([res.data]))
@@ -74,11 +77,11 @@ function Drop(props) {
 
                 setBtn(
                     <a
-                        className={`btn shadow `}
+                        className={`btn shadow =`}
                         id={`${props.req}-drop`}
                         href={url}
                         download={`${files[0].name.split(".")[0]}.${props.req}`}
-                        data-aos={"zoom-in-up"}
+                        data-aos={"fade-right"}
                         data-aos-duration={1000}
                     >
                         <strong>Download</strong>
@@ -93,7 +96,7 @@ function Drop(props) {
     return (
         <div
             data-aos={"fade-down"}
-            data-aos-duration={"2000"}
+            data-aos-duration={"1500"}
             style={{
             paddingTop: "10%"
         }}>
@@ -143,7 +146,8 @@ function Drop(props) {
             </Container>
             <Container style={{
                 display: "flex",
-                justifyContent: "center"
+                justifyContent: "center",
+                marginBottom: "5%"
             }}>
                 <Row>
                     <Col>
@@ -160,12 +164,14 @@ function Drop(props) {
                     </Col>
                     <Col>
                         {
-                            btn ? <Button variant={"danger"}
-                                          className={"shadow"}
+                            btn ? <Button
+                                          className={"btn shadow"}
                                           style={{
-                                              marginTop:"20px"
+                                              marginTop:"20px",
+                                              backgroundColor: "black",
+
                                           }}
-                                          data-aos={"fade-up"}
+                                          data-aos={"fade-left"}
                                           onClick={handleReset}
                             >
                                 Reset

@@ -23,16 +23,18 @@ public class KonPdfController {
     )
     @ResponseBody
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<byte []> handlePdfUpload( KonPdf pdf){
+    public ResponseEntity<byte []> handlePdfUpload( KonPdf generatedPdf){
 
         byte [] toReturn = {};
 
+        logger.info("Received pdf conversion request. {} pages.", generatedPdf.getPageList().size());
+
         try {
-            pdf.init();
-            pdf.generateImages();
-            pdf.resizeImages();
-            pdf.addPagesToPdf();
-            toReturn = pdf.build();
+            generatedPdf.init();
+            generatedPdf.generateImages();
+            generatedPdf.resizeImages();
+            generatedPdf.addPagesToPdf();
+            toReturn = generatedPdf.build();
         } catch (DocumentException e) {
             return ResponseEntity
                     .badRequest()
@@ -42,7 +44,7 @@ public class KonPdfController {
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                        String.format("attachment; filename=\"%s.pdf\"", pdf.getTitle()))
+                        String.format("attachment; filename=\"%s.pdf\"", generatedPdf.getTitle()))
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(toReturn);
 

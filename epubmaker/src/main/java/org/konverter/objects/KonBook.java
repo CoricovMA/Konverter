@@ -20,7 +20,7 @@ public class KonBook {
     private static final EpubWriter writer = new EpubWriter();
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-    private List<MultipartFile> fileList;
+    private List<MultipartFile> files;
 
     private String bookTitle;
     private String receivedBook;
@@ -28,7 +28,9 @@ public class KonBook {
 
     private Book convertedEbook;
 
-    public KonBook(List<MultipartFile> files){
+    public KonBook(){}
+
+    public void make(){
         ByteArrayOutputStream bos= new ByteArrayOutputStream();
 
         this.bookTitle = files.get(0).getName().split("\\.")[0];
@@ -50,7 +52,6 @@ public class KonBook {
         this.receivedBook = bos.toString().trim().strip();
 
         convertBook();
-
     }
 
     private void convertBook() {
@@ -96,7 +97,15 @@ public class KonBook {
         this.bookTitle = bookTitle;
     }
 
-    public void setFileList(List<MultipartFile> files){
-        this.fileList = files;
+    public void setFiles(List<MultipartFile> files){
+        this.files = files;
+    }
+
+    public byte [] getFinalBook(){
+        return this.outputStream.toByteArray();
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
     }
 }

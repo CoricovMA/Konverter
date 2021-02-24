@@ -24,10 +24,11 @@ public class KonPdf {
     private PdfWriter writer;
     private String title;
 
-    public KonPdf(){ };
+    public KonPdf(){}
 
 
     public void init() throws DocumentException {
+        logger.debug("KonPdf init");
         this.writer = PdfWriter.getInstance(this.document, this.outputStream);
         this.title = files.get(0).getName().split("\\.")[0];
     }

@@ -29,7 +29,7 @@ function PdfDrop(props) {
                                     backgroundColor: "#c6fc03",
                                     marginTop: "20px"
                                 }}
-                                className={"btn shadow"}
+                                className={"btn my-btn shadow"}
                                 href={url}
                                 download={`${file.name.split(".")[0]}.epub`}
                                 data-aos={"zoom-in-up"}
