@@ -98,7 +98,7 @@ function Drop(props) {
             data-aos={"fade-down"}
             data-aos-duration={"1500"}
             style={{
-            paddingTop: "10%"
+            paddingTop: "2%"
         }}>
             <div className={"file-display"}>
                 <Row>

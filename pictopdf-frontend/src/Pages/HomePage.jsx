@@ -3,13 +3,21 @@ import Navbr from "../Components/Nav";
 import {Col, Container, Row} from "react-bootstrap";
 import OptionCard from "../Components/OptionCard";
 import "../Style/optionCard.css"
+import AnimatedMan from "../Components/AnimatedComponents/AnimatedMan.jsx";
+import AnimatedWoman from "../Components/AnimatedComponents/AnimatedWoman";
+import SunAnimation from "../Components/AnimatedComponents/SunAnimation";
 
 export default function HomePage(){
     return <div>
             <Navbr/>
             <Container className={"d-flex-row"}>
                 <Row>
-                    <div className={"box"}/>
+                    <Col>
+                        <AnimatedMan/>
+                    </Col>
+                    <Col>
+                        <SunAnimation/>
+                    </Col>
                 </Row>
                 <Row>
                     <Col>

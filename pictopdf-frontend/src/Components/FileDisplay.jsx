@@ -8,10 +8,10 @@ export default function FileDisplay(props){
         <Col
             className={"col-display"}
 
-            lg={2}
+            lg={1}
             md={2}
-            sm={2}
-            xs={2}
+            sm={4}
+            xs={4}
         >
             <img
                 data-aos={"fade-in"}
