@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {postFile, postFiles} from '../Config/Api'
 import FileDisplay from "./FileDisplay";
 import {useMonitorOutput} from "react-dnd/lib/hooks/internal/useMonitorOutput";
+import AnimatedMan from './AnimatedComponents/AnimatedMan';
 
 function Drop(props) {
 
@@ -141,9 +142,12 @@ function Drop(props) {
                             )}
                         </Dropzone>
                     </Col>
+        
                 </Row>
+                <AnimatedMan/>
 
             </Container>
+
             <Container style={{
                 display: "flex",
                 justifyContent: "center",
@@ -179,7 +183,7 @@ function Drop(props) {
                         }
                     </Col>
                 </Row>
-
+                
             </Container>
         </div>
 

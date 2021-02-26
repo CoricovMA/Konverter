@@ -6,18 +6,14 @@ import "../Style/optionCard.css"
 import AnimatedMan from "../Components/AnimatedComponents/AnimatedMan.jsx";
 import AnimatedWoman from "../Components/AnimatedComponents/AnimatedWoman";
 import SunAnimation from "../Components/AnimatedComponents/SunAnimation";
+import '../Style/sunA.css'
 
 export default function HomePage(){
     return <div>
             <Navbr/>
             <Container className={"d-flex-row"}>
                 <Row>
-                    <Col>
-                        <AnimatedMan/>
-                    </Col>
-                    <Col>
-                        <SunAnimation/>
-                    </Col>
+                    <SunAnimation/>
                 </Row>
                 <Row>
                     <Col>

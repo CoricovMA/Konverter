@@ -1,0 +1,24 @@
+.main{
+    width: 100%;
+    animation: bkg 6s infinite alternate-reverse ;
+}
+
+
+#sun{
+    position: relative;
+    animation: sun 6s infinite alternate-reverse;
+    transform-origin: bottom center;
+}
+
+@keyframes sun{
+    0%{transform: rotate(0deg);  fill: #ed2550;}
+    100%{transform: rotate(-105deg); fill: #e9c897; }
+}
+
+@keyframes bkg{
+    /* 0%{background-color: rgb(95, 95, 218);}
+    25%{background-color: rgb(252, 171, 85);}
+    50%{background-color: #f7f5bd;}
+    75%{background-color: rgb(252, 171, 85);}
+    100%{background-color: rgb(95, 95, 218);} */
+}
