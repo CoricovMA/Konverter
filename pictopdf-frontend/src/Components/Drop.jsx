@@ -144,7 +144,6 @@ function Drop(props) {
                     </Col>
         
                 </Row>
-                <AnimatedMan/>
 
             </Container>
 
@@ -183,8 +182,11 @@ function Drop(props) {
                         }
                     </Col>
                 </Row>
-                
+
             </Container>
+            <Row>
+                <AnimatedMan/>
+            </Row>
         </div>
 
     )
