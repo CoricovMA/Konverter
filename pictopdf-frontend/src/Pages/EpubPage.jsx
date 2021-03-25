@@ -1,14 +1,16 @@
 import React from "react";
-import Navbr from "../Components/Nav";
 import Drop from "../Components/Drop"
-import AnimatedMan from "../Components/AnimatedComponents/AnimatedMan.jsx";
+import {Row} from "react-bootstrap";
+import AnimatedMan from "../Components/AnimatedComponents/AnimatedMan";
 
 export default function EpubPage(){
 
     return (
         <div>
-            <Navbr/>
             <Drop req="epub" extra={{}}/>
+            <Row>
+                <AnimatedMan/>
+            </Row>
         </div>
     )
 }

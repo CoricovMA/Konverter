@@ -8,6 +8,7 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import Router from "./Router/Router";
+import './index.css'
 
 export const history = createBrowserHistory({basename: '/'});
 

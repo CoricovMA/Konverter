@@ -1,16 +1,21 @@
 import React from "react";
-import  {Nav, Button, NavDropdown, Form, Navbar, FormControl} from "react-bootstrap";
+import  {Nav, Navbar} from "react-bootstrap";
+import '../Style/nav.css'
 
 export default function Navbr(){
     return (
-        <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/">Konverter</Navbar.Brand>
+        <Navbar
+            expand="md"
+            className={"nav"}
+            variant={"dark"}
+        >
+            <Navbar.Brand href="/" id={"title"}>Konverter</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="/pdf">PDF</Nav.Link>
-                    <Nav.Link href="/epub">ePub</Nav.Link>
+                    <Nav.Link href="/" className={"nav-item"}>Home</Nav.Link>
+                    <Nav.Link href="/pdf" className={"nav-item"}>PDF</Nav.Link>
+                    <Nav.Link href="/epub" className={"nav-item"}>ePub</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

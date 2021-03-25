@@ -16,7 +16,7 @@ public class KonEpubController {
             produces = "application/epub+zip"
     )
     @ResponseBody
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<byte []> handleEpubUpload(KonBook generatedBook){
 
         generatedBook.make();

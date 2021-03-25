@@ -1,16 +1,13 @@
-import React from "react";
-import Navbr from "../Components/Nav";
+import React, {useEffect} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import OptionCard from "../Components/OptionCard";
 import "../Style/optionCard.css"
-import AnimatedMan from "../Components/AnimatedComponents/AnimatedMan.jsx";
-import AnimatedWoman from "../Components/AnimatedComponents/AnimatedWoman";
-import SunAnimation from "../Components/AnimatedComponents/SunAnimation";
 import AnimatedWindow from "../Components/AnimatedComponents/AnimatedWiondow";
+import axios from "axios";
 
 export default function HomePage(){
+
     return <div>
-            <Navbr/>
             <Container className={"d-flex-row"}>
                 <Row>
                     <AnimatedWindow/>
@@ -22,6 +19,7 @@ export default function HomePage(){
                             cardText={"This app provides picture (png, jpb, etc.) to pdf functionality." +
                             " It compiles given pictures into one pdf."}
                             type={"pdf"}
+                            className={"h-auto"}
                         />
                     </Col>
                     <Col>

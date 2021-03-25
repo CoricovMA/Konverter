@@ -15,7 +15,7 @@ import java.util.List;
 
 public class KonPdf {
 
-    private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger(KonPdf.class);
 
     private List<MultipartFile> files;
     private List<KonPage> pageList = new ArrayList<>();

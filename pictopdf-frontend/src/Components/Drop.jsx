@@ -3,17 +3,16 @@ import Dropzone from 'react-dropzone'
 import {Container, Row, Col, Button} from 'react-bootstrap'
 import "../Style/drop.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {postFile, postFiles} from '../Config/Api'
+import {postFiles} from '../Config/Api'
 import FileDisplay from "./FileDisplay";
-import {useMonitorOutput} from "react-dnd/lib/hooks/internal/useMonitorOutput";
-import AnimatedMan from './AnimatedComponents/AnimatedMan';
 
 function Drop(props) {
 
     const [btn, setBtn] = useState();
     const [fileDisplay, setFileDisplay] = useState([])
     const [files, setFiles] = useState([])
-    let fileArr = []
+    let fileArr;
+    fileArr = [];
 
 
     const onDrop = useCallback((acceptedFiles) =>{
@@ -44,9 +43,13 @@ function Drop(props) {
                             />))
 
                         }
+                        break;
                     case "epub":
+                        console.log("yep");
+                        break;
                     default:
                         console.log(`Got new file. ${files}`)
+                        break;
                 }
 
                 files.push(file)
@@ -155,12 +158,8 @@ function Drop(props) {
                 <Row>
                     <Col>
                         {btn ? btn : <Button
-                            variant={"success"}
                             onClick={onClickConvert}
-                            style={{
-                                marginTop: "20px",
-                                marginLeft: "25%"
-                            }}
+                            id={"convert-button"}
                         >
                             Convert
                         </Button>}
@@ -184,9 +183,7 @@ function Drop(props) {
                 </Row>
 
             </Container>
-            <Row>
-                <AnimatedMan/>
-            </Row>
+
         </div>
 
     )

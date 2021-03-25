@@ -1,0 +1,13 @@
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: -7%;
+    width: 100%;
+    background-color:  #6C63FF;
+    color: white;
+    text-align: center;
+}
+
+.github-icon{
+    margin-left: 20px;
+}

@@ -1,15 +1,16 @@
 import React from "react";
 import AnimatedMan from "../Components/AnimatedComponents/AnimatedMan";
 import Drop from "../Components/Drop";
-import Navbr from "../Components/Nav";
+import {Row} from "react-bootstrap";
 
 export default function PdfPage(){
 
     return (
         <div>
-            <Navbr/>
             <Drop req="pdf"/>
-
+            <Row>
+                <AnimatedMan/>
+            </Row>
         </div>
 
         )

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class KonBook {
 
-    private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger(KonBook.class);
     private static final EpubWriter writer = new EpubWriter();
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -49,7 +49,7 @@ public class KonBook {
             }
         }
 
-        this.receivedBook = bos.toString().trim().strip();
+        this.receivedBook = bos.toString().trim();
 
         convertBook();
     }

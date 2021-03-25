@@ -43,3 +43,16 @@
     0%{transform: translate(0, 0)}
     100%{transform: translate(0, 25px)}
 }
+
+.main{
+    padding-top: 5%;
+    width: 100%;
+}
+
+@media screen and (max-width: 650px){
+
+    body{
+        position: relative;
+    }
+
+}

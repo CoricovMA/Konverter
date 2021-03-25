@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class KonPage {
 
-    private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger(KonPage.class);
 
     private final Document document;
     private Image image;

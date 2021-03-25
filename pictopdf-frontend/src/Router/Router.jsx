@@ -3,10 +3,13 @@ import {Route, Switch} from "react-router-dom"
 import PdfPage from "../Pages/PdfPage"
 import EpubPage from "../Pages/EpubPage"
 import HomePage from "../Pages/HomePage";
+import Navbr from "../Components/Nav";
+import Footer from "../Components/Footer";
 
 export default function Router(){
     return (
-        <div>
+        <div className={"main-page"}>
+            <Navbr/>
             <Switch>
                 <Route path="/pdf">
                     <PdfPage/>
@@ -18,6 +21,7 @@ export default function Router(){
                     <HomePage/>
                 </Route>
             </Switch>
+            <Footer/>
         </div>
     )
 }

@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class KonPdfController {
 
-    private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger(KonPdfController.class);
 
     @RequestMapping(
             value = "/convert/pdf",
@@ -22,7 +22,7 @@ public class KonPdfController {
             produces = MediaType.APPLICATION_PDF_VALUE
     )
     @ResponseBody
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<byte []> handlePdfUpload( KonPdf generatedPdf){
 
         byte [] toReturn = {};
