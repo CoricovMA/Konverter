@@ -1,0 +1,23 @@
+.pic-display{
+    height: 100px;
+    width: 80px;
+    animation: insert 1s;
+}
+
+@keyframes insert {
+    from{
+        border-radius: 0 ;
+        opacity: 0;
+    }
+    to{
+        border-radius: 5%;
+        opacity: 1;
+    }
+}
+
+.col-display{
+    border-radius: 5px;
+    height: 100px;
+    width: 80px;
+    margin-bottom: 10px;
+}
