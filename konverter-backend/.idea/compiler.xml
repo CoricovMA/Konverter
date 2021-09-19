@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="epubmaker" />
         <module name="konverter" />
+        <module name="epubmaker" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
@@ -15,6 +15,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="epubmaker" options="-parameters" />
+      <module name="konverter" options="-parameters" />
     </option>
   </component>
 </project>

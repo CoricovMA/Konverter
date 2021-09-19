@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TestController {
+public class PingController {
 
     @RequestMapping(value = "/ping", method = RequestMethod.GET,
             produces = MediaType.TEXT_PLAIN_VALUE)
