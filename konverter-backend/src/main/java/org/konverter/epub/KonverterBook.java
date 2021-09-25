@@ -17,39 +17,49 @@ import java.util.List;
 public class KonverterBook {
 
     private static final Logger logger = LogManager.getLogger(KonverterBook.class);
-    private static final EpubWriter writer = new EpubWriter();
+
+    private final EpubWriter writer = new EpubWriter();
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     private List<MultipartFile> files;
 
     private String bookTitle;
-    private String receivedBook;
-    private String finalBook;
+    private String receivedBookTextAggregated;
+    private String generatedBookAsString;
 
     public KonverterBook(){}
 
-    public void make(){
+    public void convertToEbook(){
+
         ByteArrayOutputStream bos= new ByteArrayOutputStream();
 
         this.bookTitle = files.get(0).getName().split("\\.")[0];
 
-        for (MultipartFile file : files) {
-            try {
+        appendByteStream(bos);
 
-                logger.info("Writing {} to ByteStream.", file.getName());
-
-                bos.write(file.getBytes());
-
-            } catch (IOException e) {
-
-                logger.warn("There was an error writing {} to ByteStream. {}", file.getName(), e.getStackTrace());
-
-            }
-        }
-
-        this.receivedBook = bos.toString().trim();
+        this.receivedBookTextAggregated = bos.toString().trim();
 
         convertBook();
+
+    }
+
+    private void appendByteStream(ByteArrayOutputStream bos){
+
+        files.stream().sequential().forEach(
+                item ->{
+                    try {
+                        logger.info("Writing {} to ByteStream.", item.getName());
+
+                        bos.write(item.getBytes());
+
+                    } catch (IOException e) {
+
+                        logger.warn("There was an error writing {} to ByteStream. {}", item.getName(), e.getMessage());
+
+                    }
+                }
+        );
+
     }
 
     private void convertBook() {
@@ -58,26 +68,26 @@ public class KonverterBook {
 
         long start = System.currentTimeMillis();
         
-        generateBook();
+        generateBookAsEpubHtml();
         
-        writeBook();
+        writeToEbookObject();
 
         logger.info("Book generation done in {}ms", (System.currentTimeMillis() - start));
     }
 
-    private void generateBook() {
-        this.finalBook = HtmlHelper.getTitle(this.bookTitle) +
-                HtmlHelper.prettyParagraph(receivedBook);
+    private void generateBookAsEpubHtml() {
+        this.generatedBookAsString = HtmlHelper.getTitle(this.bookTitle) +
+                HtmlHelper.prettyParagraph(receivedBookTextAggregated);
     }
 
-    private void writeBook() {
+    private void writeToEbookObject() {
 
         logger.info("Writing book.");
 
         Book convertedEbook = new Book();
         Metadata metadata = new Metadata();
         metadata.addTitle(this.bookTitle);
-        convertedEbook.addSection(this.bookTitle, new Resource(this.finalBook.getBytes(), MediatypeService.XHTML));
+        convertedEbook.addSection(this.bookTitle, new Resource(this.generatedBookAsString.getBytes(), MediatypeService.XHTML));
 
         try {
 
@@ -85,21 +95,13 @@ public class KonverterBook {
 
         } catch (IOException e) {
 
-            logger.warn("There was an error writing the book. {}", e.getStackTrace());
+            logger.warn("There was an error writing the book. {}", e.getMessage());
 
         }
 
     }
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
-
-    public void setFiles(List<MultipartFile> files){
-        this.files = files;
-    }
-
-    public byte [] getFinalBook(){
+    public byte [] getGeneratedEbookAsBytes(){
         return this.outputStream.toByteArray();
     }
 

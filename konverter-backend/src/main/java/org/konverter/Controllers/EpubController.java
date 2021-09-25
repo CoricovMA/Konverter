@@ -17,12 +17,12 @@ public class EpubController {
     @CrossOrigin(origins = "*")
     public ResponseEntity<byte []> handleEpubUpload(KonverterBook generatedBook){
 
-        generatedBook.make();
+        generatedBook.convertToEbook();
 
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
                         String.format("attachment; filename=\"%s.epub\"", generatedBook.getBookTitle()))
-                .body(generatedBook.getFinalBook());
+                .body(generatedBook.getGeneratedEbookAsBytes());
     }
 }

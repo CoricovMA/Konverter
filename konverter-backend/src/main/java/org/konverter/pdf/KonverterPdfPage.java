@@ -22,17 +22,10 @@ public class KonverterPdfPage {
         this.document = document;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
     public Image getImage() {
         return image;
     }
 
-    public Document getDocument() {
-        return document;
-    }
     public void resize(){
         this.image.scaleToFit(document.getPageSize());
     }

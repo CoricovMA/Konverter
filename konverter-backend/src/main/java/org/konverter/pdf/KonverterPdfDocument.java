@@ -41,7 +41,7 @@ public class KonverterPdfDocument {
                     try {
                         pageList.add(new KonverterPdfPage(file.getBytes(), this.document));
                     } catch (IOException | BadElementException e) {
-                        logger.warn("There was an error generating a page. {}", e.getStackTrace());
+                        logger.warn("There was an error generating a page. {}", e.getMessage());
                     }
                 }
         );
