@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KonverterPdf {
+public class KonverterPdfDocument {
 
-    private static final Logger logger = LogManager.getLogger(KonverterPdf.class);
+    private static final Logger logger = LogManager.getLogger(KonverterPdfDocument.class);
 
     private List<MultipartFile> files;
     private List<KonverterPdfPage> pageList = new ArrayList<>();
@@ -24,8 +24,7 @@ public class KonverterPdf {
     private PdfWriter writer;
     private String title;
 
-    public KonverterPdf(){}
-
+    public KonverterPdfDocument(){}
 
     public void init() throws DocumentException {
         logger.debug("KonPdf init");
@@ -62,7 +61,7 @@ public class KonverterPdf {
         logger.info("Images Added. Action took {}ms.", (System.currentTimeMillis() - start));
     }
 
-    public void addPagesToPdf(){
+    public void addPagesToPdfDocument(){
         logger.info("Adding pages to pdf.");
 
         long start = System.currentTimeMillis();
@@ -83,21 +82,13 @@ public class KonverterPdf {
 
     }
 
-    public byte[] build(){
+    public byte[] getPdfDocumentAsBytes(){
         document.close();
         return this.outputStream.toByteArray();
     }
 
     public String getTitle(){
         return this.title;
-    }
-
-    public List<MultipartFile> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<MultipartFile> files) {
-        this.files = files;
     }
 
     public List<KonverterPdfPage> getPageList() {

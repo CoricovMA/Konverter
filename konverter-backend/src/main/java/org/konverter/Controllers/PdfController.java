@@ -3,7 +3,7 @@ package org.konverter.Controllers;
 import com.itextpdf.text.DocumentException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.konverter.pdf.KonverterPdf;
+import org.konverter.pdf.KonverterPdfDocument;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class PdfController {
     )
     @ResponseBody
     @CrossOrigin(origins = "*")
-    public ResponseEntity<byte []> handlePdfUpload( KonverterPdf generatedPdf){
+    public ResponseEntity<byte []> handlePdfUpload( KonverterPdfDocument generatedPdf){
 
         byte [] toReturn = {};
 
@@ -31,8 +31,8 @@ public class PdfController {
             generatedPdf.init();
             generatedPdf.generateImages();
             generatedPdf.resizeImages();
-            generatedPdf.addPagesToPdf();
-            toReturn = generatedPdf.build();
+            generatedPdf.addPagesToPdfDocument();
+            toReturn = generatedPdf.getPdfDocumentAsBytes();
         } catch (DocumentException e) {
             return ResponseEntity
                     .badRequest()
