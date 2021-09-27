@@ -1,9 +1,13 @@
 package org.konverter.Controllers;
 
-import org.konverter.epub.KonverterBook;
+import org.konverter.objects.KonverterEbook;
+import org.konverter.objects.KonverterObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 public class EpubController {
@@ -15,14 +19,15 @@ public class EpubController {
     )
     @ResponseBody
     @CrossOrigin(origins = "*")
-    public ResponseEntity<byte []> handleEpubUpload(KonverterBook generatedBook){
+    public ResponseEntity<byte []> handleEpubUpload(List<MultipartFile> files){
 
-        generatedBook.convertToEbook();
+        KonverterObject k = new KonverterEbook();
+        k.convert(files);
 
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                        String.format("attachment; filename=\"%s.epub\"", generatedBook.getBookTitle()))
-                .body(generatedBook.getGeneratedEbookAsBytes());
+                        String.format("attachment; filename=\"%s.epub\"", "test"))
+                .body(k.getConvertedObjectAsBytes());
     }
 }

@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f137c18-1cf6-41d1-a181-8b61b692111e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/objects/KonverterEbook.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/objects/KonverterObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/objects/KonverterPdf.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/KonverterEbookRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/KonverterPdfRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/KonverterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/Orchestrator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/konverter/Controllers/EpubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/konverter/Controllers/EpubController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/konverter/epub/KonverterBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/konverter/epub/KonverterBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/konverter/pdf/KonverterPdfDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/konverter/pdf/KonverterPdfDocument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/konverter/pdf/KonverterPdfPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/konverter/pdf/KonverterPdfPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,12 +24,21 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1ydbgMCFMKwqZFR2LmVDgAmfWqs" />
   <component name="ProjectViewState">
@@ -56,6 +70,7 @@
       <option name="presentableId" value="Default" />
       <updated>1632584522457</updated>
       <workItem from="1632584523553" duration="9050000" />
+      <workItem from="1632617046727" duration="20062000" />
     </task>
     <servers />
   </component>
@@ -72,5 +87,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
