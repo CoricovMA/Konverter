@@ -5,16 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f137c18-1cf6-41d1-a181-8b61b692111e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/objects/KonverterEbook.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/objects/KonverterObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/objects/KonverterPdf.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/KonverterEbookRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/KonverterPdfRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/KonverterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/Orchestrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../konverter-frontend/.idea/konverter-frontend.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/konverter/Controllers/EpubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/konverter/Controllers/EpubController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/konverter/Controllers/PdfController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/konverter/Controllers/PdfController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/KonverterPdfRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/konverter/orchestration/KonverterPdfRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../konverter-frontend/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../konverter-frontend/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../konverter-frontend/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../konverter-frontend/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../konverter-frontend/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../konverter-frontend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../konverter-frontend/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../konverter-frontend/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../konverter-frontend/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../konverter-frontend/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../konverter-frontend/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../konverter-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../konverter-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../konverter-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../konverter-frontend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +49,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -70,7 +77,7 @@
       <option name="presentableId" value="Default" />
       <updated>1632584522457</updated>
       <workItem from="1632584523553" duration="9050000" />
-      <workItem from="1632617046727" duration="20062000" />
+      <workItem from="1632617046727" duration="21281000" />
     </task>
     <servers />
   </component>

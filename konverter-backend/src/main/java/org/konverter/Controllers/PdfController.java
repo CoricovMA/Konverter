@@ -1,13 +1,16 @@
 package org.konverter.Controllers;
 
-import com.itextpdf.text.DocumentException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.konverter.pdf.KonverterPdfDocument;
+import org.konverter.objects.KonverterObject;
+import org.konverter.objects.KonverterPdf;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 public class PdfController {
@@ -21,30 +24,19 @@ public class PdfController {
     )
     @ResponseBody
     @CrossOrigin(origins = "*")
-    public ResponseEntity<byte []> handlePdfUpload( KonverterPdfDocument generatedPdf){
+    public ResponseEntity<byte []> handlePdfUpload(List<MultipartFile> files){
 
-        byte [] toReturn = {};
+        logger.info("Received pdf conversion request. {} pages.", files.size());
 
-        logger.info("Received pdf conversion request. {} pages.", generatedPdf.getPageList().size());
-
-        try {
-            generatedPdf.init();
-            generatedPdf.generateImages();
-            generatedPdf.resizeImages();
-            generatedPdf.addPagesToPdfDocument();
-            toReturn = generatedPdf.getPdfDocumentAsBytes();
-        } catch (DocumentException e) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(toReturn);
-        }
+        KonverterObject pdf = new KonverterPdf();
+        pdf.convert(files);
 
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                        String.format("attachment; filename=\"%s.pdf\"", generatedPdf.getTitle()))
+                        String.format("attachment; filename=\"%s.pdf\"", "ConvertedPdf"))
                 .contentType(MediaType.APPLICATION_PDF)
-                .body(toReturn);
+                .body(pdf.getConvertedObjectAsBytes());
 
     }
 

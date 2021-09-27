@@ -1,2 +1,2 @@
-export const mainUrl = "https://kon-bk.herokuapp.com" ;
+export const mainUrl = "http://localhost:8080" ;
 

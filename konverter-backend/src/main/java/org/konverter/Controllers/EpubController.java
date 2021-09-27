@@ -27,7 +27,7 @@ public class EpubController {
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                        String.format("attachment; filename=\"%s.epub\"", "test"))
+                        String.format("attachment; filename=\"%s.epub\"", "ConvertedEbook"))
                 .body(k.getConvertedObjectAsBytes());
     }
 }
