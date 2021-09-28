@@ -23,10 +23,11 @@ public class KonverterEbook implements KonverterObject{
     private final EpubWriter writer = new EpubWriter();
     private final ByteArrayOutputStream convertedBookOutputStream = new ByteArrayOutputStream();
 
-
     private String bookTitle;
     private String aggregatedTextFromFiles;
     private String convertedBookAsString;
+
+    KonverterEbook(){};
 
     @Override
     public void convert(List<MultipartFile> files) {
@@ -51,7 +52,7 @@ public class KonverterEbook implements KonverterObject{
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         logger.info("Aggregating file contents into one stream.");
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
 
         files.stream().sequential().forEach(
                 file ->{
@@ -71,7 +72,7 @@ public class KonverterEbook implements KonverterObject{
 
         this.aggregatedTextFromFiles = bos.toString().trim();
 
-        logger.info("Files aggregated in {}ns." , (System.nanoTime() - start));
+        logger.info("Files aggregated in {}ms." , (System.currentTimeMillis() - start));
     }
 
     private void convertAggregatedTextToHtml(){
@@ -81,7 +82,7 @@ public class KonverterEbook implements KonverterObject{
 
     private void addHtmlTextToEbook(){
         logger.info("Writing text to ebook.");
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
 
         Book ebook = new Book();
         Metadata metadata = new Metadata();
@@ -99,6 +100,6 @@ public class KonverterEbook implements KonverterObject{
 
         }
 
-        logger.info("Finished writing text to ebook. Action took {}ns.", (System.nanoTime() - start));
+        logger.info("Finished writing text to ebook. Action took {}ms.", (System.currentTimeMillis() - start));
     }
 }

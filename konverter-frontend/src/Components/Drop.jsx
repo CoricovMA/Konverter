@@ -66,6 +66,7 @@ function Drop(props) {
         setBtn()
         setFiles([])
         setFileDisplay([])
+        window.location.reload();
     }
 
     const onClickConvert = () =>{

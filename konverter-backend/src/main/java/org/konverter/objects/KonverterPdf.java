@@ -20,6 +20,8 @@ public class KonverterPdf implements KonverterObject{
     private final ByteArrayOutputStream bos = new ByteArrayOutputStream();
     private PdfWriter writer;
 
+    KonverterPdf(){};
+
     private static class KonverterPdfPage{
 
         private final Image image;
@@ -55,29 +57,29 @@ public class KonverterPdf implements KonverterObject{
 
     private void generateImagesFromGivenFiles(List<MultipartFile> files){
         logger.info("Generating Images.");
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
 
         files.stream().sequential().forEach(
                 file ->{
                     try {
                         pageList.add(new KonverterPdfPage(file.getBytes(), this.document));
                     } catch (BadElementException | IOException e) {
-                        logger.warn("There was an error generating a PDF page. Execution time {}ns. {}",
-                                System.nanoTime() - start, e.getMessage());
+                        logger.warn("There was an error generating a PDF page. Execution time {}ms. {}",
+                                System.currentTimeMillis() - start, e.getMessage());
                     }
                 }
         );
 
-        logger.info("Images generated from given files. Action took {}ns.", (System.nanoTime() - start) );
+        logger.info("Images generated from given files. Action took {}ms.", (System.currentTimeMillis() - start) );
     }
 
     private void resizeImages(){
         logger.info("Resizing imaged before appending pdf.");
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
 
-        pageList.stream().parallel().forEach(KonverterPdfPage::resize);
+        pageList.stream().sequential().forEach(KonverterPdfPage::resize);
 
-        logger.info("Images successfully added. Action took {}ns.", (System.nanoTime() - start));
+        logger.info("Images successfully added. Action took {}ms.", (System.currentTimeMillis() - start));
     }
 
     private void initDocument() {
@@ -93,7 +95,7 @@ public class KonverterPdf implements KonverterObject{
         initDocument();
 
         logger.info("Adding pages to PDF.");
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
 
         pageList
                 .stream()
@@ -113,6 +115,6 @@ public class KonverterPdf implements KonverterObject{
                         }
                 );
 
-        logger.info("Pages added successfully. Action took {}ns.", (System.nanoTime() - start) );
+        logger.info("Pages added successfully. Action took {}ms.", (System.currentTimeMillis() - start) );
     }
 }

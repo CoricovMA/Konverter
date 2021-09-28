@@ -17,7 +17,8 @@ export default function FileDisplay(props){
                 data-aos={"fade-in"}
                 className={"shadow pic-display"}
                 style={{
-                    marginTop:"20px"
+                    marginTop:"20px",
+                    marginRight:"20px"
                 }}
                 src={URL.createObjectURL(props.file)}
                 alt={props.file.name}
